@@ -1,0 +1,123 @@
+html, body {
+    margin: 0;
+    font-family: Arial;
+    background-color: #e1e1e1;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 120vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+div {}
+
+.blurrBox {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 20px;
+    background-color: rgba(0,0,0,.40);
+
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+header img {
+    height: 75px;
+}
+
+header a {
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    color: white;
+}
+
+header a:hover{
+    background-color: rgb(92, 139, 54);
+    transition-duration: 500ms;
+}
+
+header {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    height: 75px;
+    background-color: rgb(115, 173, 67);
+    z-index: 100;
+}
+
+header .right, .left {
+    display: flex;
+}
+
+main {
+    flex: 1;
+    margin: 10px;
+    margin-top: 110px;
+    padding: 20px;
+}
+
+main .leftBar, .rightBar{
+    background-color: white;
+    width: 15%;
+    position: fixed;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 10px;
+}
+
+main .leftBar {
+    left: 20px;
+    top: 110px;
+}
+
+main .content {
+    width: 60%;
+    position: relative;
+    left: 20%;
+    z-index: 1;
+}
+
+main .rightBar {
+    right: 20px;
+    top: 110px;
+}
+
+footer {
+    min-height: 200px;
+    background-color: darkgray;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+footer .flex div {
+    padding: 10px 20px;
+}
+
+.flex > div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-right: 1px solid white;
+}
+
+.flex > div:last-child {
+    border-right: none;
+}
