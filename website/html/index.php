@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startseite</title>
+    <link rel="stylesheet" href="../css/alcoholi.css">
+    <link rel="icon" href="../pic/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<?php require_once("header.php"); ?>
+
+    <main>
+        <div class="leftBar">
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+            Drink 1<br/>
+        </div>
+        <div class="content">
+            Hier werden neue Drinks und Neuigkeiten angezeigt!
+        </div>
+        <div class="rightBar">afsdafs
+        </div>
+    </main>
+
+
+    <footer>
+        <div class="flex">
+            <div>
+                <div class="title">Links</div>
+                <a href="">Link1</a>
+                <a href="">Link1</a>
+            </div>
+            <div>
+                <div class="contact">Kontakt</div>
+                <a href="">Mail 1</a>
+                <a href="">Mail 2</a>
+            </div>
+        </div>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

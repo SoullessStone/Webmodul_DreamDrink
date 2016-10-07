@@ -8,24 +8,9 @@
 </head>
 <body>
 
+<?php require_once("header.php"); ?>
 
 <div class="wrapper">
-    <header>
-        <div class="blurrBox"></div>
-        <nav>
-            <div class="left">
-                <a href="index.html">
-                    <img src="../pic/logo.gif" alt="Logo">
-                </a>
-                <a href="mixer.html">Mixer</a>
-                <a href="drinklist.html">Drink Liste</a>
-                <a href="about.html">Über DreamDrink</a>
-            </div>
-            <div class="right">
-                <a href="login.html">Login</a>
-            </div>
-        </nav>
-    </header>
 
     <main>
         <div class="leftBar">
