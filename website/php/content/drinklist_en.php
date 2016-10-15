@@ -1,4 +1,5 @@
 <div class="content">
+    <h1>EN</h1>
     Alle Drinks inkl. deiner Bewertung!
     <?php $drinks = array(
         "GinGin" => array("Beschreibung" => "Gin und Gingerale, ein Genuss", "Bewertung" => 1),

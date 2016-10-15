@@ -1,4 +1,4 @@
-<?php if ($_GET['site'] === 'mixer') {
+<?php if ($pageId === 'mixer') {
 
     echo '<div class="addedIngredients">
             Hinzugefügte Zutat, 1ml<br/>

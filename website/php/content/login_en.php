@@ -1,4 +1,5 @@
 <div class="content">
+    <h1>EN</h1>
     <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
         <fieldset>
             <legend>Login</legend>

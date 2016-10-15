@@ -1,4 +1,4 @@
-<?php if (!(basename($_SERVER['REQUEST_URI'], '.php') === 'mixer' && !(basename($_SERVER['REQUEST_URI'], '.php') === 'login'))) {
+<?php if (!$pageId === 'mixer' && !$pageId === 'mixer') {
 
     echo '<div class="drinks">
     <a href="">Drink 1<br/></a>
