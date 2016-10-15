@@ -1,73 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/alcoholi.css">
-    <link rel="icon" href="../pic/favicon.ico" type="image/x-icon"/>
-</head>
-<body>
+<div class="content">
+    <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
+        <fieldset>
+            <legend>Login</legend>
+            <input type='hidden' name='submitted' id='submitted' value='1'/>
 
-<?php require_once("header.php"); ?>
+            <label for='username'>UserName:</label>
+            <input type='text' name='username' id='username' maxlength="50"/>
 
-<div class="wrapper"
+            <label for='password'>Password:</label>
+            <input type='password' name='password' id='password' maxlength="50"/>
 
-    <main>
-        <div class="leftBar">
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-            Drink 1<br/>
-        </div>
-        <div class="content">
-            <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
-                <fieldset >
-                    <legend>Login</legend>
-                    <input type='hidden' name='submitted' id='submitted' value='1'/>
-                    
-                    <label for='username' >UserName:</label>
-                    <input type='text' name='username' id='username'  maxlength="50" />
-                    
-                    <label for='password' >Password:</label>
-                    <input type='password' name='password' id='password' maxlength="50" />
-                    
-                    <input type='submit' name='Submit' value='Submit' />
-                </fieldset>
-            </form>
-    </main>
-
-
-    <footer>
-        <div class="flex">
-            <div>
-                <div class="title">Links</div>
-                <a href="">Link1</a>
-                <a href="">Link1</a>
-            </div>
-            <div>
-                <div class="contact">Kontakt</div>
-                <a href="">Mail 1</a>
-                <a href="">Mail 2</a>
-            </div>
-        </div>
-
-    </footer>
-
+            <input type='submit' name='Submit' value='Submit'/>
+        </fieldset>
+    </form>
 </div>
-
-</body>
-</html>

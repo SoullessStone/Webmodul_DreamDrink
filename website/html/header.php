@@ -1,6 +1,6 @@
 <?php
 $sites = array(
-    "index" => array("url" => "index.php", "text" => ""),
+    "index" => array("url" => "index.php", "text" => "Home"),
     "mixer" => array("url" => "mixer.php", "text" => "Drink-Mixer"),
     "drinklist" => array("url" => "drinklist.php", "text" => "Drink-Liste"),
     "about" => array("url" => "about.php", "text" => "Über DreamDrink"),
@@ -11,14 +11,18 @@ $sites = array(
 <header>
     <nav>
         <div class="left">
-            <a href="<?php echo $sites["index"]["url"]; ?>" <?php if (basename($_SERVER['REQUEST_URI'], '.php') === 'index') echo 'class="active"'; ?>>
+            <a href="index.php?site=index">
                 <img src="../pic/logo.gif" alt="Logo">
             </a>
-            <a href="<?php echo $sites["mixer"]["url"]; ?>" <?php if (basename($_SERVER['REQUEST_URI'], '.php') ===  'mixer') echo 'class="active"'; ?>>Mixer</a>
-            <a href="<?php echo $sites["drinklist"]["url"]; ?>" <?php if (basename($_SERVER['REQUEST_URI'], '.php') === 'drinklist') echo 'class="active"'; ?>>Drink
-                Liste</a>
-            <a href="<?php echo $sites["about"]["url"]; ?>" <?php if (basename($_SERVER['REQUEST_URI'], '.php') === 'about') echo 'class="active"'; ?>>Über
-                DreamDrink</a>
+            <?php
+            foreach ($sites as $site => $value) {
+                $cssClass = "";
+                if ($_GET["site"] === $site) {
+                    $cssClass = "class='active'";
+                }
+                echo "<a href='index.php?site=$site' $cssClass>" . $sites[$site]["text"] . "</a>";
+            }
+            ?>
         </div>
         <div class="right">
             <a href="<?php echo $sites["login"]["url"]; ?>" <?php if (basename($_SERVER['REQUEST_URI'], '.php') === 'login') echo 'class="active"'; ?>>Login</a>
@@ -26,6 +30,4 @@ $sites = array(
     </nav>
 </header>
 
-
-<div class="wrapper">
-    <div class="blurrBox"></div>
+<div class="blurrBox"></div>
