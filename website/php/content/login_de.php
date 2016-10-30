@@ -1,4 +1,5 @@
 <div class="content">
+    <?php include('../validation/login_validation.php') ?>
     <h1>DE</h1>
     <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
         <fieldset>
@@ -7,9 +8,12 @@
 
             <label for='username'>UserName:</label>
             <input type='text' name='username' id='username' maxlength="50"/>
+            <mark><?php echo $error_username; ?></mark>
+            <br />
 
             <label for='password'>Password:</label>
             <input type='password' name='password' id='password' maxlength="50"/>
+            <br />
 
             <input type='submit' name='Submit' value='Submit'/>
         </fieldset>

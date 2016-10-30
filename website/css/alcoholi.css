@@ -71,6 +71,14 @@ header .right, .left {
     display: flex;
 }
 
+header .left {
+    margin-left: 1%;
+}
+
+header .right {
+    margin-right: 1%;
+}
+
 
 /*
 *  Main Content
@@ -95,6 +103,7 @@ main .leftBar, .rightBar{
 main .leftBar {
     left: 20px;
     top: 110px;
+    margin-left: 1%;
 }
 
 main .content {
@@ -107,6 +116,16 @@ main .content {
 main .rightBar {
     right: 20px;
     top: 110px;
+    margin-right: 1%;
+}
+
+/*
+*  Form Validation
+*  ----------------------------------------------------------------
+*/
+
+mark {
+    visibility: hidden;
 }
 
 /*

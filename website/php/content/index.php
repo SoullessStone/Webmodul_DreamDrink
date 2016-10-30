@@ -25,7 +25,6 @@
         if (isset($_GET['site'])){
             $site = $pageId . "_" . $language . ".php";
             if (file_exists($site)) {
-                echo $site;
                 require_once($site);
             } else {
                 header ("Location: index.php?site=home&lang=de");
