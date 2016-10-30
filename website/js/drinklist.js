@@ -45,9 +45,9 @@ function _addHeaderToTable(table, lang) {
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
-    cell1.innerHTML = lang==='de' ? "<b>Name</b>" : "<b>Name</b>";
-    cell2.innerHTML = lang==='de' ? "<b>Beschreibung</b>" : "<b>Description</b>";
-    cell3.innerHTML = lang==='de' ? "<b>Bewertung</b>" : "<b>Rating</b>";
+    cell1.textContent = lang==='de' ? "Name" : "Name";
+    cell2.textContent = lang==='de' ? "Beschreibung" : "Description";
+    cell3.textContent = lang==='de' ? "Bewertung" : "Rating";
 }
 
 function _addRow(table, drink) {
@@ -55,9 +55,9 @@ function _addRow(table, drink) {
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        cell1.innerHTML = drink.name;
-        cell2.innerHTML = drink.beschreibung;
-        cell3.innerHTML = drink.bewertung;
+        cell1.textContent = drink.name;
+        cell2.textContent = drink.beschreibung;
+        cell3.textContent = drink.bewertung;
 }
 
 function buildDrinkList(lang) {

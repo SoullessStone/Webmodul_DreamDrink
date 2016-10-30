@@ -119,6 +119,11 @@ main .rightBar {
     margin-right: 1%;
 }
 
+.dragBox {
+    padding: 20px;
+    border: 1px solid grey;
+}
+
 /*
 *  Form Validation
 *  ----------------------------------------------------------------
