@@ -1,5 +1,6 @@
 <?php
     include "../functions.php";
+    include "../baseSession.php";
     $language = get_param('lang', 'de');
     $pageId = get_param('site', "home");
 ?>
@@ -19,9 +20,6 @@
 
 <div class="wrapper">
     <main>
-        <div class="leftBar">
-            <?php require_once("../left_sidebar.php"); ?>
-        </div>
         <?php 
         if (isset($_GET['site'])){
             $site = $pageId . "_" . $language . ".php";
@@ -34,9 +32,6 @@
             header ("Location: index.php?site=home&lang=de");
         }
         ?>
-        <div class="rightBar">
-            <?php require_once("../right_sidebar.php"); ?>
-        </div>
     </main>
 
     <?php require_once("../footer.php"); ?>

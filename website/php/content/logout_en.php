@@ -1,4 +1,5 @@
- <div class="content">
-    <h1>EN</h1>
-            Bye!
- </div>
+ <?php
+        $_SESSION = array(); 
+        session_destroy();
+        header( "Location: index.php?site=about&lang=en" );
+ ?>

@@ -1,4 +1,10 @@
+<div class="leftBar">
+
+</div>
 <div class="content">
     <h1>EN</h1>
-    Detailansicht eines Drinks
+    Detail-View of a drink
+</div>
+<div class="rightBar">
+    
 </div>

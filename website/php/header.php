@@ -38,7 +38,15 @@ $sites = array(
             if ($pageId === $site) {
                 $cssClass = "class='active'";
             }
-            echo "<a href='index.php?site=login&lang=$language' $cssClass>" . $sites["login"]["text_$language"] . "</a>";
+
+            if(!empty($_SESSION['loggedIn']) && !empty($_SESSION['username']))
+            {  
+                $username = $_SESSION['username'];
+                echo "<a href='index.php?site=logout&lang=$language' $cssClass>Hallo " . $username . "!<br/>Logout</a>";
+            } else
+            {
+                echo "<a href='index.php?site=login&lang=$language' $cssClass>" . $sites["login"]["text_$language"] . "</a>";
+            }
             ?>
         </div>
     </nav>

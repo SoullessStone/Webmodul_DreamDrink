@@ -1,9 +1,15 @@
-<script type="text/javascript" src="../../js/drinklist.js">buildDrinkList();</script>
+<script type="text/javascript" src="../../js/drinklist.js"></script>
+<div class="leftBar">
+
+</div>
 <div class="content">
-    <h1>EN</h1>
-    Alle Drinks inkl. deiner Bewertung!<br/>
-    Suche: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList()'/>
+    <h1>All drinks</h1>
+    All drinks with your rating!<br/>
+    Search: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList("en")'/>
     <table id='drinks'>
     <table>
 
+</div>
+<div class="rightBar">
+    
 </div>

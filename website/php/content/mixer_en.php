@@ -1,4 +1,10 @@
- <div class="content">
-    <h1>EN</h1>
-            Hier kannst du eigene Drinks zusammenstellen.
+ <div class="leftBar">
+
+</div>
+<div class="content">
+    <h1>Mixer</h1>
+    Create your own drinks and share them!
  </div>
+<div class="rightBar">
+    
+</div>

@@ -40,14 +40,14 @@ function _getClearedTable() {
     return newDrinkTable;
 }
 
-function _addHeaderToTable(table) {
+function _addHeaderToTable(table, lang) {
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
-    cell1.innerHTML = "<b>Name</b>";
-    cell2.innerHTML = "<b>Beschreibung</b>";
-    cell3.innerHTML = "<b>Bewertung</b>";
+    cell1.innerHTML = lang==='de' ? "<b>Name</b>" : "<b>Name</b>";
+    cell2.innerHTML = lang==='de' ? "<b>Beschreibung</b>" : "<b>Description</b>";
+    cell3.innerHTML = lang==='de' ? "<b>Bewertung</b>" : "<b>Rating</b>";
 }
 
 function _addRow(table, drink) {
@@ -60,12 +60,15 @@ function _addRow(table, drink) {
         cell3.innerHTML = drink.bewertung;
 }
 
-function buildDrinkList() {
+function buildDrinkList(lang) {
     var searchText = document.getElementById('filter_input').value;
     console.log('filter table for keyword: ' + searchText);
 
     var table = _getClearedTable();
-    _addHeaderToTable(table);
+    if (lang !== "en" && lang !== "de") {
+        lang = "de";
+    }
+    _addHeaderToTable(table, lang);
     
     var drinksToShow = _.filter(drinks, function(drink) {
         return _.toLower(drink.name).indexOf(_.toLower(searchText)) !== -1 

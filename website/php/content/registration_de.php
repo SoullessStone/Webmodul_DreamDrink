@@ -1,3 +1,6 @@
+<div class="leftBar">
+
+</div>
 <div class="content">
     <?php include('../validation/registration_validation.php') ?>
     <form id='registration' method='post' accept-charset='UTF-8'>
@@ -5,7 +8,7 @@
             <legend>Registrierung</legend>
             <input type='hidden' name='submitted' id='submitted' value='1'/>
 
-            <label for='username'>UserName:</label>
+            <label for='username'>Benutzername:</label>
             <input type='text' name='username' id='username' maxlength="50" value="<?php echo $username; ?>" required />
             <mark><?php echo $error_username; ?></mark>
             <br />
@@ -24,4 +27,7 @@
             <input type='submit' name='Submit' value='Submit'/>
         </fieldset>
     </form>
+</div>
+<div class="rightBar">
+    
 </div>
