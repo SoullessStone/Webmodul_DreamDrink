@@ -11,6 +11,7 @@
     <title>Startseite</title>
     <link rel="stylesheet" href="../../css/alcoholi.css">
     <link rel="icon" href="../../pic/favicon.ico" type="image/x-icon"/>
+    <script src="../../lib/lodash.js"></script>
 </head>
 <body>
 
