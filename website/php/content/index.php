@@ -1,6 +1,8 @@
 <?php
     include "../functions.php";
     include "../baseSession.php";
+    include "../db/DbHelper.php";
+    include "../db/include_entities.php";
     $language = get_param('lang', 'de');
     $pageId = get_param('site', "home");
 ?>
@@ -33,8 +35,11 @@
         }
         ?>
     </main>
+    
 
-    <?php require_once("../footer.php"); ?>
+    <?php 
+        require_once("../footer.php"); 
+    ?>
 
 </div>
 

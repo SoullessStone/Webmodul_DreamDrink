@@ -1,54 +1,17 @@
  <?php
-    $ingredients = array(
-        1 => array(
-            "id"=> 1,
-            "de"=> "Vodka",
-            "en"=> "Vodka",
-            "kat"=> "alk"
-        ),
-        2 => array(
-            "id"=> 2,
-            "de"=> "Gin",
-            "en"=> "Gin",
-            "kat"=> "alk"
-        ),
-        3 => array(
-            "id"=> 3,
-            "de"=> "Whiskey",
-            "en"=> "Whiskey",
-            "kat"=> "alk"
-        ),
-        4 => array(
-            "id"=> 4,
-            "de"=> "Zitrone",
-            "en"=> "Lemon",
-            "kat"=> "veg"
-        ),
-        5 => array(
-            "id"=> 5,
-            "de"=> "Rosmarin",
-            "en"=> "rosemary",
-            "kat"=> "veg"
-        ),
-        6 => array(
-            "id"=> 6,
-            "de"=> "Ginger Ale",
-            "en"=> "Ginger Ale",
-            "kat"=> "noalk"
-        ),
-        7 => array(
-            "id"=> 7,
-            "de"=> "Tonic",
-            "en"=> "Tonic Water",
-            "kat"=> "noalk"
-        )
-    );
+    $ingredients = array();
+    $res = DbHelper::doQuery("select * from ingredient;");
+    while($ingredient = $res->fetch_object("Ingredient")){
+        array_push($ingredients, $ingredient);
+    }
  ?>
 <script type="text/javascript" src="../../js/mixer.js"></script>
  <div class="leftBar">
     <?php
-        foreach ($ingredients as $key=>$value) {
-            echo "<label draggable='true' ondragstart='drag(event)' id='ing$key'>$value[$language]</label><br/>";
+        foreach ($ingredients as $ingredient) {
+            $id = $ingredient->getId();
+            $text = $ingredient->getName();
+            echo "<label draggable='true' ondragstart='drag(event)' id='ing$id'>$text</label><br/>";
         }
     ?>
 </div>
