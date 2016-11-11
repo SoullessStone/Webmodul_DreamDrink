@@ -64,7 +64,7 @@
             <th>Ingredient</th>
             <th>Unity</th>
         </tr>
-    <table>
+    </table>
     <br/><br/><br/><br/><br/><br/>
  </div>
 <div class="rightBar">

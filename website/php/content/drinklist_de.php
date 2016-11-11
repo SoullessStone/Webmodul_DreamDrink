@@ -7,7 +7,7 @@
     Alle Drinks inkl. deiner Bewertung!<br/>
     Suche: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList("de")'/>
     <table id='drinks'>
-    <table>
+    </table>
 
 </div>
 <div class="rightBar">
