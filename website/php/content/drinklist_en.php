@@ -7,7 +7,7 @@
     All drinks with your rating!<br/>
     Search: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList("en")'/>
     <table id='drinks'>
-    <table>
+    </table>
 
 </div>
 <div class="rightBar">

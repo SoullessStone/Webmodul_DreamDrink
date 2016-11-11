@@ -64,7 +64,7 @@
             <th>Zutat</th>
             <th>Einheiten</th>
         </tr>
-    <table>
+    </table>
     <br/><br/><br/><br/><br/><br/>
  </div>
 <div class="rightBar">
