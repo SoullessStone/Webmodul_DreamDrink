@@ -29,10 +29,14 @@
 </div>
 <?php
     if (isset($_POST["submit"])) {
+        $dbPw = "a0kyogTPCzkNyGv9OcfuNeeN.Fw/qcI4g96eHsw6gu1NQ1d/80tfS";
+        $hash = password_hash($_POST["password"], PASSWORD_BCRYPT);
+        echo $hash;
+        echo password_verify($dbPw, $hash);
         // Check login (https://code.tutsplus.com/tutorials/user-membership-with-php--net-1523)
         $_SESSION["loggedIn"] = 1;
         $_SESSION["username"] = $_POST["username"];
-        header( "Location: index.php?site=about&lang=de" );
+        //header( "Location: index.php?site=about&lang=de" );
     } else {
     }
 ?>
