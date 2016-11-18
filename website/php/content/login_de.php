@@ -25,18 +25,35 @@
     <a href='index.php?site=registration&lang=de'>Noch kein Account? Hier registrieren!</a>
 </div>
 <div class="rightBar">
-    
+
 </div>
 <?php
-    if (isset($_POST["submit"])) {
-        $dbPw = "a0kyogTPCzkNyGv9OcfuNeeN.Fw/qcI4g96eHsw6gu1NQ1d/80tfS";
-        $hash = password_hash($_POST["password"], PASSWORD_BCRYPT);
-        echo $hash;
-        echo password_verify($dbPw, $hash);
+if (isset($_POST["submit"])) {
+    $pw = $_POST["password"];
+    $username = $_POST["username"];
+
+    $db = DbHelper::getInstance();
+    $stmt = $db->prepare(
+        "SELECT * FROM User WHERE username=?"
+    );
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if (!$result || $result->num_rows !== 1) {
+        echo "Keine Daten gefunden.";
+        return;
+    }
+    $row = $result->fetch_assoc();
+    $validLogin = password_verify($pw, $row["password"]);
+    if ($validLogin===true){
         // Check login (https://code.tutsplus.com/tutorials/user-membership-with-php--net-1523)
         $_SESSION["loggedIn"] = 1;
         $_SESSION["username"] = $_POST["username"];
-        //header( "Location: index.php?site=about&lang=de" );
+        header( "Location: index.php?site=home&lang=de" );
     } else {
+        echo "Keine Daten gefunden.";
+        //header( "Location: index.php?site=about&lang=de" );
     }
+} else {
+}
 ?>

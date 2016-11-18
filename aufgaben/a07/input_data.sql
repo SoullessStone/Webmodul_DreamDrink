@@ -12,4 +12,5 @@ INSERT INTO `ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Whi
 INSERT INTO `ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Ginger Ale', NULL, '1');
 
 
-INSERT INTO `user` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Michel', '$2y$10$a0kyogTPCzkNyGv9OcfuNeeN.Fw/qcI4g96eHsw6gu1NQ1d/80tfS', 'michel', 'Michel', 'Uz', '1');
+INSERT INTO `user` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Michel', '$2y$10$fgk5gIvxH83bK0LAjg5RJuzKFyY.q4ORhAbQyP1P4aEv2QOsOx6eG', 'michel', 'Michel', 'Uz', '1');
+INSERT INTO `User` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Sabine', '$2y$10$fgk5gIvxH83bK0LAjg5RJuzKFyY.q4ORhAbQyP1P4aEv2QOsOx6eG', 'safsdf@adsfsdf.ch', NULL, NULL, '1');
