@@ -1,4 +1,11 @@
  <?php
+ // TODO: Add saved information for drinkname, desc
+    if (!isset($_SESSION["loggedIn"]))
+        header("location: index.php?site=login");
+
+    if (isset($_POST["submit"])) {
+        createNewDrinkAndNavigateToIt();
+    }
     $allIngredients = getAllIngredientsFromDb();
     $usedIngredients = getUsedIngredients();
     addNewIngredientIfPresent($allIngredients, $usedIngredients);
@@ -6,9 +13,8 @@
     //unset($_SESSION["usedIngredients"]);
  ?>
  <script>
-    function saveNumber(i){
-        var count = document.getElementById("ing_"+i).value;
-        document.cookie = "count_"+i+"="+count;
+    function saveInput(input){
+        document.cookie = "input_"+input.id+"="+input.value;
         console.log(document.cookie);
     }
  </script>
@@ -27,29 +33,81 @@
     <h1>Mischer</h1>
     <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
     
-    <table id='mixing'>
+    <form id='login' action='index.php?site=mixer&saveDrink=1' method='post' accept-charset='UTF-8'>
         <?php
-            foreach ($usedIngredients as $ingredient) {
-                    $id = $ingredient->getId();
-                    $name = $ingredient->getName();
-                    $unit = $ingredient->getUnitName();
-                    $content = isset($_COOKIE["count_$id"]) ? $_COOKIE["count_$id"] : "1";
-                    echo "<tr>";
-                    echo "<th>$name</th>";
-                    echo "<th><input type='number' id='ing_$id' onkeyup='saveNumber($id)' value='$content' /></th>";
-                    echo "<th>$unit</th>";
-                    echo "<th><a href='index.php?site=mixer&removeIng=$id'>x</a></th>";
-                    echo "</tr>";
-            }
+            if (isset($_GET["noNameSet"]))
+                echo "<p style='color:red'>Du hast vergessen, dem Drink einen Namen zu geben.</p>";
         ?>
-    </table>
-    <br/><br/><br/><br/><br/><br/>
+        <label for='drinkName'>Name deines Drinks:</label>
+        <input type='text' name='drinkName' id='drinkName' maxlength='45' onkeyup='saveInput(drinkName)' /><br/><br/>
+        <table id='mixing'>
+            <?php
+                foreach ($usedIngredients as $ingredient) {
+                        $id = $ingredient->getId();
+                        $name = $ingredient->getName();
+                        $unit = $ingredient->getUnitName();
+
+                        $inputId = "ing_$id";
+                        $content = isset($_COOKIE["input_".$inputId]) ? $_COOKIE["input_".$inputId] : "1";
+                        echo "<tr>";
+                        echo "<th>$name</th>";
+                        echo "<th><input type='number' name='$inputId' id='$inputId' onkeyup='saveInput($inputId)' value='$content' /></th>";
+                        echo "<th>$unit</th>";
+                        echo "<th><a href='index.php?site=mixer&removeIng=$id'>x</a></th>";
+                        echo "</tr>";
+                }
+            ?>
+        </table>
+        <label for='drinkDescription'>Beschreibe deinen Drink:</label>
+        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"></textarea> <br/>
+        <input type='submit' name='submit' value='Drink speichern'/>
+    </form>
  </div>
 <div class="rightBar">
     
 </div>
 
 <?php
+
+    function createNewDrinkAndNavigateToIt() {
+        if (isset($_POST["drinkName"]) && strlen($_POST["drinkName"])>0 
+                && isset($_POST["drinkDescription"]) && strlen($_POST["drinkDescription"])>0) {
+                $id = createDrink();
+                foreach (getPostedIngredients() as $key => $value) {
+                    createDrinkIngredientConnection($id, $key, $value);
+                }
+                unset($_SESSION["usedIngredients"]);
+            } else {
+            header("location: index.php?site=mixer&noNameSet=true");
+        }
+    }
+
+    function getPostedIngredients() {
+        $result = array();
+        foreach ($_POST as $key => $value) {
+            if (substr( $key, 0, 4 ) === "ing_")
+                $result[substr($key, 4, strlen($key)-1)] = $value;
+        }
+        return $result;
+    }
+
+    function createDrink() {
+        $db = DbHelper::getInstance();
+        $drinkName = $db->escape_string($_POST["drinkName"]);
+        $description = $db->escape_string($_POST["drinkDescription"]);
+        $username = $db->escape_string($_SESSION["username"]);
+        $res = DbHelper::doQuery("INSERT INTO drink (name, description, creator) VALUES ('$drinkName', '$description', '$username');");
+        return $db->insert_id;
+    }
+
+    function createDrinkIngredientConnection($drinkid, $ingredientid, $amount) {
+        $db = DbHelper::getInstance();
+        $drinkid = $db->escape_string($drinkid);
+        $ingredientid = $db->escape_string($ingredientid);
+        $amount = $db->escape_string($amount);
+        $db = DbHelper::getInstance();
+        $res = DbHelper::doQuery("INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
+    }
 
     function getAllIngredientsFromDb() {
         $res = array();

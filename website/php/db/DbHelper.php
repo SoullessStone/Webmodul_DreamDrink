@@ -24,7 +24,7 @@
         static public function doQuery($sql) {
             $result = self::getInstance()->query($sql);
             if (!$result) 
-                die("DB error");
+                die(self::getInstance()->error);
             return $result;
         }
     }

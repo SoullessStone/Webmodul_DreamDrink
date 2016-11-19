@@ -1,6 +1,8 @@
 <?php
     class Drink {
-        private $id, $name, $description, $creator, $isPublic, $image_path;
+        private $id, $name, $description, $creator, $isPublic;
+        // TODO: Nötig? ist nicht in tabelle
+        private $image_path;
         
         public function getId() {
             return $this->id;
