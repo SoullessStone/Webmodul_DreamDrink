@@ -4,8 +4,8 @@
 </div>
 <div class="content">
     <h1>All drinks</h1>
-    All drinks with your rating!<br/>
-    Search: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList("en")'/>
+    <p>All drinks with your rating!</p>
+    <div class="search">Search: <input type='text' name='filter_input' id='filter_input' onkeyup='buildDrinkList("en")'/></div>
     <table id='drinks'>
     </table>
 

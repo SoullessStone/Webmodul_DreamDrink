@@ -3,8 +3,7 @@
 </div>
 <div class="content">
     <h1>EN</h1>
-  Homehomehome
-</div>
+    <p>Homehomehome</p></div>
 <div class="rightBar">
     
 </div>

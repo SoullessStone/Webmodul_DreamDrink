@@ -17,7 +17,7 @@
 </div>
 <div class="content">
     <h1>Mischer</h1>
-    Hier kannst du eigene Drinks zusammenstellen.<br/>
+    <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
     <div class="dragBox" ondrop="drop(event)" ondragover="allowDrop(event)">
         Zutaten hier rein ziehen
     </div>

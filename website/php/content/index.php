@@ -14,6 +14,7 @@
     <title>Startseite</title>
     <link rel="stylesheet" href="../../css/alcoholi.css">
     <link rel="icon" href="../../pic/favicon.ico" type="image/x-icon"/>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Questrial" rel="stylesheet">
     <script src="../../lib/lodash.js"></script>
 </head>
 <body>
