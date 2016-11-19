@@ -1,8 +1,8 @@
 <?php
     include "../functions.php";
-    include "../baseSession.php";
     include "../db/DbHelper.php";
     include "../db/include_entities.php";
+    include "../baseSession.php";
     $language = get_param('lang', 'de');
     $pageId = get_param('site', "home");
 ?>

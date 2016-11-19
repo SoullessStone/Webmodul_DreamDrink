@@ -1,9 +1,8 @@
 <?php
-    $recent_drink = array();
-    $res = DbHelper::doQuery("select * from drink where id = 1;");
+    $res = DbHelper::doQuery("select * from drink where id = 3;");
+    $recent_drink = $res->fetch_object("Drink");
     $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = 1);");
     $imagePath = $imageResult->fetch_assoc()["path"];
-    $recent_drink = $res->fetch_object("Drink");
 ?>
 <div class="leftBar">
     <h4>Neuster Drink:</h4>

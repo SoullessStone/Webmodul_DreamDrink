@@ -1,6 +1,9 @@
 <?php
     class Ingredient {
+        // from db
         private $id, $name, $image_path, $unit;
+        // not from db
+        private $unitName;
         
         public function getId() {
             return $this->id;
@@ -16,6 +19,14 @@
 
         public function getUnit() {
             return $this->unit;
+        }
+
+        public function getUnitName() {
+            return $this->unitName;
+        }
+
+        public function setUnitName($newName) {
+            $this->unitName = $newName;
         }
 
         public function __toString(){
