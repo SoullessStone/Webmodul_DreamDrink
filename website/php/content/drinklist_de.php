@@ -12,6 +12,7 @@
                 <td><b>Name</b></td>
                 <td><b>Beschreibung</b></td>
                 <td><b>Ersteller</b></td>
+                <td><b>Erstelldatum</b></td>
                 <td><b>Bewertung</b></td>
             </tr>
             <?php
@@ -19,6 +20,7 @@
                     echo "<tr>";
                     echo "    <td>".$drink->getName()."</td>";
                     echo "    <td>".$drink->getDescription()."</td>";
+                    echo "    <td>".$drink->getCreatedAt()."</td>";
                     echo "    <td>".$drink->getCreator()."</td>";
                     echo "    <td>TODO</td>";
                     echo "</tr>";

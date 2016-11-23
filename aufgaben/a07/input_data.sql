@@ -15,4 +15,8 @@ INSERT INTO `ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Gin
 INSERT INTO `user` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Michel', '$2y$10$fgk5gIvxH83bK0LAjg5RJuzKFyY.q4ORhAbQyP1P4aEv2QOsOx6eG', 'michel', 'Michel', 'Uz', '1');
 INSERT INTO `User` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Sabine', '$2y$10$fgk5gIvxH83bK0LAjg5RJuzKFyY.q4ORhAbQyP1P4aEv2QOsOx6eG', 'safsdf@adsfsdf.ch', NULL, NULL, '1');
 
-INSERT INTO `Drink`(`name`, `description`, `creator`) VALUES ('Pink Squirrel', 'Als Einhörnchen unter den Drinks wird es besonders gerne von den Frauen gesehen. Jedoch sollte dieser Drink jedem schmecken, wagt er sich denn an dessen rosaroten Pelz!', 'Sabine');
+INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Pink Squirrel', 'Als Einhörnchen unter den Drinks wird es besonders gerne von den Frauen gesehen. Jedoch sollte dieser Drink jedem schmecken, wagt er sich denn an dessen rosaroten Pelz!', 'Sabine', '2016-11-23');
+
+INSERT INTO `Drink`(`name`, `description`, `creator`) VALUES ('Zucker Ale', 'Vor allem Zucker. Etwas Ginger Ale hinzufügen, fertig!', 'Michel');
+    INSERT INTO `ingredients_for_drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (1, 2, 100);
+    INSERT INTO `ingredients_for_drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (8, 2, 1);

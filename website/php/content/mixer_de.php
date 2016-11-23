@@ -96,7 +96,9 @@
         $drinkName = $db->escape_string($_POST["drinkName"]);
         $description = $db->escape_string($_POST["drinkDescription"]);
         $username = $db->escape_string($_SESSION["username"]);
-        $res = DbHelper::doQuery("INSERT INTO drink (name, description, creator) VALUES ('$drinkName', '$description', '$username');");
+        $date = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
+        echo "INSERT INTO drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');";
+        $res = DbHelper::doQuery("INSERT INTO drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');");
         return $db->insert_id;
     }
 
@@ -106,6 +108,7 @@
         $ingredientid = $db->escape_string($ingredientid);
         $amount = $db->escape_string($amount);
         $db = DbHelper::getInstance();
+        echo "INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);";
         $res = DbHelper::doQuery("INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
     }
 
