@@ -77,6 +77,7 @@
                     createDrinkIngredientConnection($id, $key, $value);
                 }
                 unset($_SESSION["usedIngredients"]);
+                header("location: index.php?site=drink&id=".$id);
             } else {
             header("location: index.php?site=mixer&noNameSet=true");
         }

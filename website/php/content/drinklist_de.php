@@ -17,8 +17,9 @@
             </tr>
             <?php
                 foreach (getAllDrinksFromDb() as $drink) {
+                    $link = "index.php?site=drink&id=".$drink->getId();
                     echo "<tr>";
-                    echo "    <td>".$drink->getName()."</td>";
+                    echo "    <td><a href='$link'>".$drink->getName()."</a></td>";
                     echo "    <td>".$drink->getDescription()."</td>";
                     echo "    <td>".$drink->getCreatedAt()."</td>";
                     echo "    <td>".$drink->getCreator()."</td>";
