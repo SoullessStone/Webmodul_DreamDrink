@@ -8,6 +8,8 @@
     $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = $detail_drink_id);");
     $imagePath = $imageResult->fetch_assoc()["path"];
     $detailIngredients = getDetailIngredientsFromDb($detail_drink_id);
+
+    // TODO Sabine: Bewertung ermöglichen (sehr einfach halten am Anfang)
 ?>
 <div class="leftBar">
     <h5>Benötigte Zutaten:</h5>

@@ -5,7 +5,6 @@
         array_push($ingredients, $ingredient);
     }
  ?>
-<script type="text/javascript" src="../../js/mixer.js"></script>
  <div class="leftBar">
     <?php
         foreach ($ingredients as $ingredient) {

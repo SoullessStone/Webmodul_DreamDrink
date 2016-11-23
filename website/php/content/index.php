@@ -1,9 +1,8 @@
 <?php
-    include "../functions.php";
     include "../db/DbHelper.php";
     include "../db/include_entities.php";
     include "../baseSession.php";
-    $language = get_param('lang', 'de');
+    $language = getLanguage();
     $pageId = get_param('site', "home");
 ?>
 
@@ -29,10 +28,10 @@
             if (file_exists($site)) {
                 require_once($site);
             } else {
-                header ("Location: index.php?site=home&lang=de");
+                header ("Location: index.php?site=home");
             }
         } else {
-            header ("Location: index.php?site=home&lang=de");
+            header ("Location: index.php?site=home");
         }
         ?>
     </main>
@@ -46,3 +45,24 @@
 
 </body>
 </html>
+
+<?php
+    function get_param($name, $default) {
+        if (!isset($_GET[$name])) {
+            return $default;
+        }
+        return urldecode($_GET[$name]);
+    }
+
+    function getLanguage(){
+        if (isset($_GET["lang"])) {
+            setcookie("lang", $_GET["lang"]);
+            return $_GET["lang"];
+        }
+        if (isset($_COOKIE["lang"])) {
+            return $_COOKIE["lang"];
+        }
+        setcookie("lang","de");
+        return "de";
+    }
+?>
