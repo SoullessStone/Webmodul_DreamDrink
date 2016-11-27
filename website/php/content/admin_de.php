@@ -1,5 +1,7 @@
 <?php
     removeNewIngredientIfPresent();
+    addNewIngredientIfPossible();
+    checkIfUserIsAdmin();
 ?>
 
 <div class="leftBar">
@@ -9,6 +11,49 @@
     <h1>Admin</h1>
     <p>Administriere alles!</p>
 
+    <form id='addIngredient' action='index.php?site=admin&add=true' method='post' accept-charset='UTF-8'>
+        <fieldset>
+            <legend>Neue Zutat hinzufügen</legend>
+            <input type='hidden' name='submitted' id='submitted' value='1'/>
+
+                <table>
+                    <tr>
+                        <td>
+                            <label for='name'>Name:</label>
+                        </td>
+                        <td>
+                            <input type='text' name='name' id='name' maxlength="25"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label for='imagepath'>Bild-Name:</label>
+                        </td>
+                        <td>
+                            <input type='text' name='imagepath' id='imagepath' maxlength="45"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Einheit:</label>
+                        </td>
+                        <td>
+                            <select name='unit' id='unit' >
+                                <?php 
+                                    foreach (getAllUnitsFromDb() as $unit) {
+                                        echo "<option value='".$unit->getId()."'>".$unit->getName()."</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            <input type='submit' name='submit' value='Submit'/>
+        </fieldset>
+    </form>
+
+    <br/><br/>
     <table id="ingredients">
         <tbody>
             <tr>
@@ -39,6 +84,32 @@
 </div>
 
 <?php
+    function checkIfUserIsAdmin() {
+        if (! (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"]===1)) {
+            header("Location: index.php?site=home");
+        }
+    }
+
+    function addNewIngredientIfPossible() {
+        if (isset($_GET["add"])) {
+            $db = DbHelper::getInstance();
+            $name = $db->escape_string($_POST["name"]);
+            $image_path = $db->escape_string($_POST["imagepath"]);
+            $unit_id = $db->escape_string($_POST["unit"]);
+            echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
+            $res = DbHelper::doQuery("INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");    
+        }
+    }
+
+    function getAllUnitsFromDb() {
+        $res = array();
+        $dbRes = DbHelper::doQuery("select * from unit;");
+        while($ingredient = $dbRes->fetch_object("Unit")){
+            array_push($res, $ingredient);
+        }
+        return $res;
+    }
+    
     function getAllIngredientsFromDb() {
         $res = array();
         $dbRes = DbHelper::doQuery("select * from ingredient;");
@@ -67,6 +138,7 @@
             } else {
                 echo "noerror";
             }
+            header("Location: index.php?site=admin");
         }
     }
 ?>

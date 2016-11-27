@@ -33,13 +33,16 @@
     <h1>Mischer</h1>
     <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
     
-    <form id='login' action='index.php?site=mixer&saveDrink=1' method='post' accept-charset='UTF-8'>
+    <form id='newDrink' action='index.php?site=mixer&saveDrink=1' method='post' accept-charset='UTF-8'>
         <?php
-            if (isset($_GET["noNameSet"]))
+            if (isset($_GET["noNameSet"])) {
                 echo "<p style='color:red'>Du hast vergessen, dem Drink einen Namen zu geben.</p>";
+            }
+            
+            $content = isset($_COOKIE["input_drinkName"]) ? $_COOKIE["input_drinkName"] : "";
         ?>
         <label for='drinkName'>Name deines Drinks:</label>
-        <input type='text' name='drinkName' id='drinkName' maxlength='45' onkeyup='saveInput(drinkName)' /><br/><br/>
+        <input type='text' name='drinkName' id='drinkName' maxlength='45' onkeyup='saveInput(drinkName)' value="<?php echo $content ?>" /><br/><br/>
         <table id='mixing'>
             <?php
                 foreach ($usedIngredients as $ingredient) {
@@ -58,8 +61,11 @@
                 }
             ?>
         </table>
+        <?php
+            $content = isset($_COOKIE["input_drinkDescription"]) ? $_COOKIE["input_drinkDescription"] : "";
+        ?>
         <label for='drinkDescription'>Beschreibe deinen Drink:</label>
-        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"></textarea> <br/>
+        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"><?php echo $content ?></textarea> <br/>
         <input type='submit' name='submit' value='Drink speichern'/>
     </form>
  </div>
@@ -108,7 +114,6 @@
         $drinkid = $db->escape_string($drinkid);
         $ingredientid = $db->escape_string($ingredientid);
         $amount = $db->escape_string($amount);
-        $db = DbHelper::getInstance();
         echo "INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);";
         $res = DbHelper::doQuery("INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
     }

@@ -1,12 +1,13 @@
 <?php
-$sites = array(
-    "home" => array("text_en" => "Home", "text_de" => "Zuhause"),
-    "mixer" => array("text_en" => "Drink-Mixer", "text_de" => "Drink-Mischerl"),
-    "drinklist" => array("text_en" => "Drink-List", "text_de" => "Drink-Liste"),
-    "about" => array("text_en" => "About DreamDrink", "text_de" => "Über DreamDrink"),
-    "login" => array("text_en" => "Login", "text_de" => "Einlöggerln"),
-    "registration" => array("text_en" => "Registration", "text_de" => "Registrierung")
-);
+    $sites = array(
+        "home" => array("text_en" => "Home", "text_de" => "Zuhause"),
+        "mixer" => array("text_en" => "Drink-Mixer", "text_de" => "Drink-Mischerl"),
+        "drinklist" => array("text_en" => "Drink-List", "text_de" => "Drink-Liste"),
+        "about" => array("text_en" => "About DreamDrink", "text_de" => "Über DreamDrink"),
+        "login" => array("text_en" => "Login", "text_de" => "Einlöggerln"),
+        "registration" => array("text_en" => "Registration", "text_de" => "Registrierung"),
+        "admin" => array("text_en" => "Admin", "text_de" => "Administration")
+    );
 ?>
 <header>
     <nav>
@@ -23,7 +24,14 @@ $sites = array(
                 if ($pageId === $site) {
                     $cssClass = "class='active'";
                 }
-                echo "<a href='index.php?site=$site&lang=$language' $cssClass>" . $sites[$site]["text_$language"] . "</a>";
+                if ($site==="admin") {
+                    if(!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin']===1)
+                    { 
+                        echo "<a href='index.php?site=$site&lang=$language' $cssClass>" . $sites[$site]["text_$language"] . "</a>";
+                    }
+                } else {
+                    echo "<a href='index.php?site=$site&lang=$language' $cssClass>" . $sites[$site]["text_$language"] . "</a>";
+                }
             }
             ?>
         </div>

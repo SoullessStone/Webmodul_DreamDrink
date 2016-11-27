@@ -49,6 +49,7 @@ if (isset($_POST["submit"])) {
         // Check login (https://code.tutsplus.com/tutorials/user-membership-with-php--net-1523)
         $_SESSION["loggedIn"] = 1;
         $_SESSION["username"] = $_POST["username"];
+        $_SESSION["isAdmin"] = $row["isAdmin"];
         header( "Location: index.php?site=home&lang=de" );
     } else {
         echo "Keine Daten gefunden.";
