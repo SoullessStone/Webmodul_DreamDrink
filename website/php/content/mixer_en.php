@@ -1,6 +1,6 @@
  <?php
     $ingredients = array();
-    $res = DbHelper::doQuery("select * from ingredient;");
+    $res = DbHelper::doQuery("select * from Ingredient;");
     while($ingredient = $res->fetch_object("Ingredient")){
         array_push($ingredients, $ingredient);
     }

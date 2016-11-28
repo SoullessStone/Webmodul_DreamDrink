@@ -104,8 +104,8 @@
         $description = $db->escape_string($_POST["drinkDescription"]);
         $username = $db->escape_string($_SESSION["username"]);
         $date = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
-        echo "INSERT INTO drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');";
-        $res = DbHelper::doQuery("INSERT INTO drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');");
+        echo "INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');";
+        $res = DbHelper::doQuery("INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');");
         return $db->insert_id;
     }
 
@@ -114,13 +114,13 @@
         $drinkid = $db->escape_string($drinkid);
         $ingredientid = $db->escape_string($ingredientid);
         $amount = $db->escape_string($amount);
-        echo "INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);";
-        $res = DbHelper::doQuery("INSERT INTO ingredients_for_drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
+        echo "INSERT INTO Ingredients_for_Drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);";
+        $res = DbHelper::doQuery("INSERT INTO Ingredients_for_Drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
     }
 
     function getAllIngredientsFromDb() {
         $res = array();
-        $dbRes = DbHelper::doQuery("select * from ingredient;");
+        $dbRes = DbHelper::doQuery("select * from Ingredient;");
         while($ingredient = $dbRes->fetch_object("Ingredient")){
             array_push($res, $ingredient);
         }
@@ -188,7 +188,7 @@
     function enrichIngredientWithUnitName($ingredient) {
         $res = array();
         $param = DbHelper::getInstance()->escape_string($ingredient->getUnit());
-        $dbRes = DbHelper::doQuery("select * from unit where id = $param;");
+        $dbRes = DbHelper::doQuery("select * from Unit where id = $param;");
         $unit = $dbRes->fetch_object("Unit");
         $ingredient->setUnitName($unit->getName());
         return $ingredient;

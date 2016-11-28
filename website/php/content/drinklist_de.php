@@ -38,7 +38,7 @@
 <?php
     function getAllDrinksFromDb() {
         $res = array();
-        $dbRes = DbHelper::doQuery("select * from drink;");
+        $dbRes = DbHelper::doQuery("select * from Drink;");
         while($drink = $dbRes->fetch_object("Drink")){
             array_push($res, $drink);
         }

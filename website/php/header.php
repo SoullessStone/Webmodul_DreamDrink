@@ -25,7 +25,7 @@
                     $cssClass = "class='active'";
                 }
                 if ($site==="admin") {
-                    if(!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin']===1)
+                    if(!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin']==1)
                     { 
                         echo "<a href='index.php?site=$site&lang=$language' $cssClass>" . $sites[$site]["text_$language"] . "</a>";
                     }

@@ -85,7 +85,7 @@
 
 <?php
     function checkIfUserIsAdmin() {
-        if (! (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"]===1)) {
+        if (! (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"]==1)) {
             header("Location: index.php?site=home");
         }
     }
@@ -97,13 +97,13 @@
             $image_path = $db->escape_string($_POST["imagepath"]);
             $unit_id = $db->escape_string($_POST["unit"]);
             echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
-            $res = DbHelper::doQuery("INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");    
+            $res = DbHelper::doQuery("INSERT INTO Ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");    
         }
     }
 
     function getAllUnitsFromDb() {
         $res = array();
-        $dbRes = DbHelper::doQuery("select * from unit;");
+        $dbRes = DbHelper::doQuery("select * from Unit;");
         while($ingredient = $dbRes->fetch_object("Unit")){
             array_push($res, $ingredient);
         }
@@ -112,7 +112,7 @@
     
     function getAllIngredientsFromDb() {
         $res = array();
-        $dbRes = DbHelper::doQuery("select * from ingredient;");
+        $dbRes = DbHelper::doQuery("select * from Ingredient;");
         while($ingredient = $dbRes->fetch_object("Ingredient")){
             array_push($res, $ingredient);
         }
@@ -120,7 +120,7 @@
     }
     
     function isIngredientUsed($id) {
-        $dbRes = DbHelper::doQuery("SELECT id FROM ingredient where id IN (SELECT DISTINCT ingredient_id FROM ingredients_for_drink) and id=$id;");
+        $dbRes = DbHelper::doQuery("SELECT id FROM Ingredient where id IN (SELECT DISTINCT ingredient_id FROM Ingredients_for_Drink) and id=$id;");
         return ! ($dbRes->num_rows === 0);        
     }
 
@@ -132,7 +132,7 @@
             $db = DbHelper::getInstance();
             $ingId = $db->escape_string($_GET["removeIng"]);
             $db = DbHelper::getInstance();
-            $res = DbHelper::doQuery("delete from ingredient where id = '$ingId';");
+            $res = DbHelper::doQuery("delete from Ingredient where id = '$ingId';");
             if ($res instanceof DbError) {
                 echo $res.getError();
             } else {

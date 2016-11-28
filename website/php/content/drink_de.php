@@ -3,7 +3,7 @@
         header("location: index.php?site=drinklist");
     }
     $detail_drink_id = $_GET["id"];
-    $res = DbHelper::doQuery("select * from drink where id = $detail_drink_id;");
+    $res = DbHelper::doQuery("select * from Drink where id = $detail_drink_id;");
     $detail_drink = $res->fetch_object("Drink");
     $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = $detail_drink_id);");
     $imagePath = $imageResult->fetch_assoc()["path"];

@@ -1,5 +1,5 @@
 <?php
-    $res = DbHelper::doQuery("select * from drink where id = 1;");
+    $res = DbHelper::doQuery("select * from Drink where id = 1;");
     $recent_drink = $res->fetch_object("Drink");
     $recent_drink_id = $recent_drink->getId();
     $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = 1);");

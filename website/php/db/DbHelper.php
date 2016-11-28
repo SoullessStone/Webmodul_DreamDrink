@@ -1,6 +1,7 @@
 <?php
     class DbHelper extends mysqli{
-        const HOST="localhost", USER="root", PW="", DB_NAME="DreamDrinkDB";
+        //const HOST="localhost", USER="u989533150_dream", PW="gin-gin", DB_NAME="u989533150_dream";
+        const HOST="localhost", USER="root", PW="", DB_NAME="dreamdrinkdb";
         static private $instance;
         
         public function __construct() {
