@@ -1,5 +1,4 @@
 <div class="leftBar">
-
 </div>
 <div class="content">
     <h1>Über uns</h1>

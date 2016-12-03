@@ -2,9 +2,8 @@
 
 </div>
 <div class="content">
-    <?php include('../validation/login_validation.php') ?>
     <h1>Login</h1>
-    <form id='login' action='index.php?site=login' method='post' accept-charset='UTF-8'>
+    <form id='login' action='' method='post' accept-charset='UTF-8'>
         <fieldset>
             <legend>Login</legend>
             <input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -22,17 +21,8 @@
         </fieldset>
     </form>
     <br/>
-    <a href='index.php?site=registration&lang=en'>No Account? Register here!</a>
+    <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Not a member yet? Register here!</a>
 </div>
 <div class="rightBar">
-    
+
 </div>
-<?php
-    if (isset($_POST["submit"])) {
-        // Check login (https://code.tutsplus.com/tutorials/user-membership-with-php--net-1523)
-        $_SESSION["loggedIn"] = 1;
-        $_SESSION["username"] = $_POST["username"];
-        header( "Location: index.php?site=about&lang=en" );
-    } else {
-    }
-?>

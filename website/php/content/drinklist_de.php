@@ -16,7 +16,7 @@
                 <td><b>Bewertung</b></td>
             </tr>
             <?php
-                foreach (getAllDrinksFromDb() as $drink) {
+                foreach ($this->model->getAllDrinksFromDb() as $drink) {
                     $link = "index.php?site=drink&id=".$drink->getId();
                     echo "<tr>";
                     echo "    <td><a href='$link'>".$drink->getName()."</a></td>";
@@ -34,14 +34,3 @@
 <div class="rightBar">
     
 </div>
-
-<?php
-    function getAllDrinksFromDb() {
-        $res = array();
-        $dbRes = DbHelper::doQuery("select * from Drink;");
-        while($drink = $dbRes->fetch_object("Drink")){
-            array_push($res, $drink);
-        }
-        return $res;
-    }
-?>
