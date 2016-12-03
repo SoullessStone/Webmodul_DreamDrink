@@ -1,6 +1,4 @@
 <?php
-    removeNewIngredientIfPresent();
-    addNewIngredientIfPossible();
     checkIfUserIsAdmin();
 ?>
 
@@ -11,7 +9,7 @@
     <h1>Admin</h1>
     <p>Administriere alles!</p>
 
-    <form id='addIngredient' action='index.php?site=admin&add=true' method='post' accept-charset='UTF-8'>
+    <form id='addIngredient' action='' method='post' accept-charset='UTF-8'>
         <fieldset>
             <legend>Neue Zutat hinzufügen</legend>
             <input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -41,7 +39,7 @@
                         <td>
                             <select name='unit' id='unit' >
                                 <?php 
-                                    foreach (getAllUnitsFromDb() as $unit) {
+                                    foreach ($this->model->getAllUnitsFromDb() as $unit) {
                                         echo "<option value='".$unit->getId()."'>".$unit->getName()."</option>";
                                     }
                                 ?>
@@ -62,15 +60,15 @@
                 <td><b>Aktionen</b></td>
             </tr>
             <?php
-                foreach (getAllIngredientsFromDb() as $drink) {
-                    $used = isIngredientUsed($drink->getId());
+                foreach ($this->model->getAllIngredientsFromDb() as $drink) {
+                    $used = $this->model->isIngredientUsed($drink->getId());
                     echo "<tr>";
                     echo "    <td>".$drink->getName()."</td>";
                     echo "    <td>".$drink->getUnit()."</td>";
                     if ($used) {
                         echo "    <td>Nicht löschbar: Wird verwendet</td>";
                     } else {
-                        echo "    <td><a href='index.php?site=admin&removeIng=".$drink->getId()."'>Löschen</a></td>";
+                        echo "    <td><a href='".$_SESSION["baseURL"]."Admin/removeIng=".$drink->getId()."'>Löschen</a></td>";
                     }
                     echo "</tr>";
                 } 
@@ -86,59 +84,8 @@
 <?php
     function checkIfUserIsAdmin() {
         if (! (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"]==1)) {
-            header("Location: index.php?site=home");
+            header("Location: ./Login");
         }
     }
 
-    function addNewIngredientIfPossible() {
-        if (isset($_GET["add"])) {
-            $db = DbHelper::getInstance();
-            $name = $db->escape_string($_POST["name"]);
-            $image_path = $db->escape_string($_POST["imagepath"]);
-            $unit_id = $db->escape_string($_POST["unit"]);
-            echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
-            $res = DbHelper::doQuery("INSERT INTO Ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");    
-        }
-    }
-
-    function getAllUnitsFromDb() {
-        $res = array();
-        $dbRes = DbHelper::doQuery("select * from Unit;");
-        while($ingredient = $dbRes->fetch_object("Unit")){
-            array_push($res, $ingredient);
-        }
-        return $res;
-    }
-    
-    function getAllIngredientsFromDb() {
-        $res = array();
-        $dbRes = DbHelper::doQuery("select * from Ingredient;");
-        while($ingredient = $dbRes->fetch_object("Ingredient")){
-            array_push($res, $ingredient);
-        }
-        return $res;
-    }
-    
-    function isIngredientUsed($id) {
-        $dbRes = DbHelper::doQuery("SELECT id FROM Ingredient where id IN (SELECT DISTINCT ingredient_id FROM Ingredients_for_Drink) and id=$id;");
-        return ! ($dbRes->num_rows === 0);        
-    }
-
-    function removeNewIngredientIfPresent() {
-        if (isset($_GET["removeIng"])) {
-            if (isIngredientUsed($_GET["removeIng"])) {
-                return;
-            }
-            $db = DbHelper::getInstance();
-            $ingId = $db->escape_string($_GET["removeIng"]);
-            $db = DbHelper::getInstance();
-            $res = DbHelper::doQuery("delete from Ingredient where id = '$ingId';");
-            if ($res instanceof DbError) {
-                echo $res.getError();
-            } else {
-                echo "noerror";
-            }
-            header("Location: index.php?site=admin");
-        }
-    }
 ?>

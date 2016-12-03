@@ -17,6 +17,10 @@ class AdminController {
     public function submitedForm($postInfo) {
         $this->model->formSubmitted($postInfo);
     }
+
+    public function removeIng($id) {
+        $this->model->removeNewIngredientIfPresent($id);
+    }
 }
 
 ?>

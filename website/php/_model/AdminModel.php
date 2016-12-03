@@ -14,6 +14,7 @@ class AdminModel {
             $unit_id = $this->db->escape_string($_POST["unit"]);
             echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
             $res = DbHelper::doQuery("INSERT INTO Ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");   
+            header("Location: ".$_SESSION["baseURL"]."Admin");
         }
     }
 
@@ -40,22 +41,19 @@ class AdminModel {
         return ! ($dbRes->num_rows === 0);        
     }
 
-    function removeNewIngredientIfPresent() {
-        if (isset($_GET["removeIng"])) {
-            if (isIngredientUsed($_GET["removeIng"])) {
-                return;
-            }
-            $db = DbHelper::getInstance();
-            $ingId = $db->escape_string($_GET["removeIng"]);
-            $db = DbHelper::getInstance();
-            $res = DbHelper::doQuery("delete from Ingredient where id = '$ingId';");
-            if ($res instanceof DbError) {
-                echo $res.getError();
-            } else {
-                echo "noerror";
-            }
-            header("Location: ".$_SESSION["baseURL"]."Admin");
+    function removeNewIngredientIfPresent($id) {
+        if ($this->isIngredientUsed($id)) {
+            return;
         }
+        $ingId = $this->db->escape_string($id);
+        $db = DbHelper::getInstance();
+        $res = DbHelper::doQuery("delete from Ingredient where id = '$ingId';");
+        if ($res instanceof DbError) {
+            echo $res.getError();
+        } else {
+            echo "noerror";
+        }
+        header("Location: ".$_SESSION["baseURL"]."Admin");
     }
 }
 
