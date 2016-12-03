@@ -20,7 +20,7 @@
             if (! $this->model->isObjectWithIdInArray($usedIngredients, $ingredient->getId())) {
                 $id = $ingredient->getId();
                 $text = $ingredient->getName();
-                echo "<label><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text -></a></label><br/>";
+                echo "<label class='choose_ingredient'><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text -></a></label><br/>";
             }
         }
     ?>
