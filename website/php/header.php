@@ -40,8 +40,8 @@
         </div>
         <div class="right">
             <?php
-            $cssDe = $language === "de" ? "style='color:red'" : "";
-            $cssEn = $language === "en" ? "style='color:red'" : "";
+            $cssDe = $language === "de" ? "class='selectedLang'" : "";
+            $cssEn = $language === "en" ? "class='selectedLang'" : "";
             echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=de' $cssDe>DE</a>";
             echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=en' $cssEn>EN</a>";
 
