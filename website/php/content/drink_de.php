@@ -9,10 +9,12 @@
     $imagePath = $imageResult->fetch_assoc()["path"];
 
     $rateRes = DbHelper::doQuery("select * from Rating where drink_id = $detail_drink_id");
+    $ratingObj = $rateRes->fetch_object("Rating");
     $rateCountRes = DbHelper::doQuery("select COUNT(*) as rate_Count from Rating where drink_id = $detail_drink_id");
     $rateCount = $rateCountRes->fetch_assoc()["rate_Count"];
-    $ratingObj = $rateRes->fetch_object("Rating");
-    $rating = $ratingObj->getRating();
+    if (!empty($ratingObj)) {
+        $rating = $ratingObj->getRating();
+    }
 
     // TODO Sabine: Bewertung ermöglichen (sehr einfach halten am Anfang)
 ?>
@@ -33,9 +35,11 @@
 </div>
 <div class="content">
     <h1><?php echo $detail_drink->getName(); ?></h1>
-    <div class="big_image">
-        <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath; ?>" alt="<?php echo $detail_drink->getName(); ?>" />
-    </div>
+    <?php if(!empty($imagePath)) { ?>
+        <div class="big_image">
+            <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath ?>" alt="<?php echo $detail_drink->getName(); ?>" />
+        </div>
+    <?php } ?>
     <h3>Beschreibung</h3>
     <div class="drink_description"><?php echo $detail_drink->getDescription(); ?></div>
 

@@ -16,12 +16,7 @@
     $pageId = getCurPage("Home");
     setLanguage($pageId);
     $language = getLanguage();
-    
-    //$_SESSION["baseURL"] = "http://localhost/Webmodul_DreamDrink/website/";
-    // Für Sabine :)
     $_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
-    // Für hara.kiwi
-    //$_SESSION["baseURL"] = "http://hara.kiwi/";
 
     if (! isset($_GET["controller"])){
         header ("Location: ".$_SESSION['baseURL']."Home");
