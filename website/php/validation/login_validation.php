@@ -1,28 +1,25 @@
 <?php
+if (isset($_POST["submit"])) {
+    $pw = $_POST["password"];
+    $username = $_POST["username"];
 
-$success = true;
-$username = $email = $error_username = $error_password = $error_email = '';
-
-if (empty($_POST['username'])) {
-    $error_username = 'Bitte geben Sie einen Benutzernamen ein';
-    $success = false;
+    $db = DbHelper::getInstance();
+    $param = DbHelper::getInstance()->escape_string($username);
+    $dbRes = DbHelper::doQuery("SELECT * FROM User WHERE username='$param';");
+    $row = $dbRes->fetch_assoc();
+    $validLogin = password_verify($pw, $row["password"]);
+    if ($validLogin===true){
+        // Check login (https://code.tutsplus.com/tutorials/user-membership-with-php--net-1523)
+        $_SESSION["loggedIn"] = 1;
+        $_SESSION["username"] = $_POST["username"];
+        if ($row["isAdmin"]==1) {
+            $_SESSION["isAdmin"] = $row["isAdmin"];
+        }
+        header( "Location: index.php?site=home&lang=de" );
+    } else {
+        echo "Keine Daten gefunden.";
+        //header( "Location: index.php?site=about&lang=de" );
+    }
+} else {
 }
-/*else if (($_POST['name']) exists in DB) {
-    $error_username = 'Dieser Benutzername ist bereits vergeben, bitte geben Sie einen anderen ein';
-}*/
-else $name = $_POST['username'];
-
-if (empty($_POST['password']) || !filter_var($_POST['password']))  {
-    $error_password = 'Sie haben nicht das richtige Passwort eingegeben. <a href="">Passwort vergessen?</a>';
-    $success = false;
-} else $password = $_POST['password'];
-
-if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))  {
-    $error_email = 'Bitte geben Sie eine gültige E-Mail-Adresse an';
-    $success = false;
-} else $email = $_POST['email'];
-
-if ($success) {
-    echo "<p>Sie haben sich erfolgreich registriert!</p>";
-    exit; }
 ?>
