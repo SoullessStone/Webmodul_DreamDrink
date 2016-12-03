@@ -17,7 +17,7 @@
             </tr>
             <?php
                 foreach ($this->model->getAllDrinksFromDb() as $drink) {
-                    $link = "index.php?site=drink&id=".$drink->getId();
+                    $link = $_SESSION["baseURL"]."Drink?id=".$drink->getId();
                     echo "<tr>";
                     echo "    <td><a href='$link'>".$drink->getName()."</a></td>";
                     echo "    <td>".$drink->getDescription()."</td>";
