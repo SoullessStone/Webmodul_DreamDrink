@@ -9,7 +9,7 @@
     <h4>Newest drink</h4>
     <a href="index.php?site=drink&id=<?php echo $recent_drink_id; ?>"><h3><?php echo $recent_drink->getName(); ?></h3></a>
     <div class="side_image">
-        <img src="../../pic/Drinks/<?php echo $imagePath; ?>" alt="<?php echo $recent_drink->getName(); ?>" />
+        <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath; ?>" alt="<?php echo $recent_drink->getName(); ?>" />
     </div>
 
 </div>

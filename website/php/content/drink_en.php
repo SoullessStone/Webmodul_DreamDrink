@@ -25,7 +25,7 @@
 <div class="content">
     <h1><?php echo $detail_drink->getName(); ?></h1>
     <div class="big_image">
-        <img src="../../pic/Drinks/<?php echo $imagePath; ?>" alt="<?php echo $detail_drink->getName(); ?>" />
+        <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath; ?>" alt="<?php echo $detail_drink->getName(); ?>" />
     </div>
     <h3>Beschreibung</h3>
     <div class="drink_description"><?php echo $detail_drink->getDescription(); ?></div>

@@ -130,7 +130,7 @@ main .rightBar {
 .side_image img {
     width: 240px;
     position: absolute;
-    clip: rect(0px,215px,200px,0px);
+    clip: rect(0px,205px,200px,0px);
 }
 
 .dragBox {
