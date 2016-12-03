@@ -1,8 +1,6 @@
 <?php
     class Drink {
         private $id, $name, $description, $creator, $isPublic, $createdAt;
-        // TODO: Nötig? ist nicht in tabelle
-        private $image_path;
         
         public function getId() {
             return $this->id;
@@ -22,10 +20,6 @@
 
         public function getStatus() {
             return $this->isPublic;
-        }
-
-        public function getImage_path() {
-            return $this->image_path;
         }
 
         public function getCreatedAt() {
