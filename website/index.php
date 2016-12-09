@@ -64,6 +64,7 @@
     <link rel="stylesheet" href="<?php echo $_SESSION['baseURL'].'css/alcoholi.css'; ?>">
     <link rel="icon" href="<?php echo $_SESSION['baseURL'].'pic/favicon.ico'; ?>" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Questrial" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
 

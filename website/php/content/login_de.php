@@ -10,11 +10,12 @@
 
             <label for='username'>Benutzername:</label>
             <input type='text' name='username' id='username' maxlength="50"/>
-            <mark><?php echo $error_username; ?></mark>
+            <span class="error"><?php echo $error_username; ?></span>
             <br />
 
             <label for='password'>Passwort:</label>
             <input type='password' name='password' id='password' maxlength="50"/>
+            <span class="error"><?php echo $error_password; ?></span>
             <br />
 
             <input type='submit' name='submit' value='Submit'/>

@@ -16,6 +16,7 @@
                 <td><b>Bewertung</b></td>
             </tr>
             <?php
+            $link = $_SESSION["baseURL"]."/pic/recommend_drink.png";
                 foreach ($this->model->getAllDrinksFromDb() as $drink) {
                     $drink_id = $drink->getId();
                     $link = $_SESSION["baseURL"]."Drink?id=".$drink_id;
@@ -35,14 +36,42 @@
                     echo "    <td>".$drink->getDescription()."</td>";
                     echo "    <td>".$drink->getCreator()."</td>";
                     echo "    <td>".$drink->getCreatedAt()."</td>";
-                    echo "    <td>".$average_rate."</td>";
+                    echo "    <td>".$average_rate."<img src='<?php echo $link; ?>' class='recommend_drink'/></td>";
                     echo "</tr>";
                 } 
             ?>
         </tbody>
     </table>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <h3>Empfehle diesen Drink einem Freund!</h3>
+            <p>Einfach hier seine E-Mail-Adresse eintragen:</p>
+            <input type="text">
+            <p class="remark">Wir werden einzig diesen Drink verschicken, keinen Spam.</p>
+        </div>
 
+    </div>
 </div>
 <div class="rightBar">
     <h4>Beliebteste Drinks</h4>
 </div>
+<script>
+    var modal = document.getElementById("modal");
+    var elem = document.getElementsByClassName("recommend");
+    var span = document.getElementsByClassName("close")[0];
+
+    elem.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
