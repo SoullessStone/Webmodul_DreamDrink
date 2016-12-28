@@ -1,7 +1,5 @@
 <?php
     class DrinklistTable {
-        private $id, $name, $description, $creator, $isPublic, $createdAt;
-        
         public function render($model) {
             ?>
                 Suche mit AJAX machen!
