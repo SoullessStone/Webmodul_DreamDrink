@@ -10,8 +10,9 @@ function search(link) {
 <?php
     class DrinkSearch {
         public function render() {
+                $baseLink = $_SESSION["baseURL"]."php/ajax/searchDrinks.php";
             ?>
-                 <input type="text" id="searchWord" onkeyup="search('http://localhost/Webmodul_DreamDrink/website/php/ajax/searchDrinks.php')">
+                <input type='text' id='searchWord' onkeyup='search(<?php echo '"'.$baseLink.'"'; ?>)'>
                  <p id="results"></p>
             <?php
         }
