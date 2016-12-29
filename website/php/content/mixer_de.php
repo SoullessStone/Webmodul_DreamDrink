@@ -16,13 +16,8 @@
  </script>
  <div class="leftBar">
     <?php
-        foreach ($allIngredients as $ingredient) {
-            if (! $this->model->isObjectWithIdInArray($usedIngredients, $ingredient->getId())) {
-                $id = $ingredient->getId();
-                $text = $ingredient->getName();
-                echo "<label class='choose_ingredient'><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text -></a></label><br/>";
-            }
-        }
+        $ingredientList = new IngredientList();
+        $ingredientList->render($this->model, $allIngredients, $usedIngredients);
     ?>
 </div>
 <div class="content">

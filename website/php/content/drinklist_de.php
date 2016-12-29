@@ -1,3 +1,4 @@
+
 <div class="leftBar">
     <h4>Suche Drinks nach Inhalt:</h4>
 </div>
@@ -5,6 +6,7 @@
     <h1>Alle Drinks</h1>
     <p>Alle Drinks inkl. deiner Bewertung!</p>
 
+<<<<<<< HEAD
     Suche mit AJAX machen!
     <div id="drinks">
             <?php
@@ -49,6 +51,12 @@
         </div>
 
     </div>
+=======
+    <?php
+        $drinklistTable = new DrinklistTable();
+        $drinklistTable->render($this->model);
+    ?>
+>>>>>>> 661cebc6861f131acd5ecd23d10936f33bfcfbea
 </div>
 <div class="rightBar">
     <h4>Beliebteste Drinks</h4>
