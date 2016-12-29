@@ -26,5 +26,8 @@
     <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Noch kein Account? Hier registrieren!</a>
 </div>
 <div class="rightBar">
-
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

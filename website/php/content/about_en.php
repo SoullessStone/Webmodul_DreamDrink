@@ -18,5 +18,8 @@
     nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 </div>
 <div class="rightBar">
-    
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

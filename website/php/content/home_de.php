@@ -23,6 +23,6 @@
 <div class="rightBar">
     <?php
         $drinkSearch = new DrinkSearch();
-        $drinkSearch->render();
+        $drinkSearch->render($this->lang);
     ?>
 </div>

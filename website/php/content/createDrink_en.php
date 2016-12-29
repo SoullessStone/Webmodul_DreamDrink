@@ -47,7 +47,6 @@
     <p>Im Durchschnitt geben unsere User dem Drink: 5/5 Sterne.</p>
 </div>
 <div class="rightBar">
-    <h5>Andere neue Drinks:</h5>
 </div>
 
 

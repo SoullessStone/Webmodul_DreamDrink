@@ -12,7 +12,10 @@
     ?>
 </div>
 <div class="rightBar">
-    <h4>Beliebteste Drinks</h4>
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>
 <script>
     var modal = document.getElementById("modal");

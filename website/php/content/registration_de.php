@@ -25,5 +25,8 @@
     </form>
 </div>
 <div class="rightBar">
-    
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

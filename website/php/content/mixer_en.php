@@ -16,23 +16,18 @@
  </script>
  <div class="leftBar">
     <?php
-        foreach ($allIngredients as $ingredient) {
-            if (! $this->model->isObjectWithIdInArray($usedIngredients, $ingredient->getId())) {
-                $id = $ingredient->getId();
-                $text = $ingredient->getName();
-                echo "<label><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text -></a></label><br/>";
-            }
-        }
+        $ingredientList = new IngredientList();
+        $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang);
     ?>
 </div>
 <div class="content">
-    <h1>Mixer</h1>
-    <h3>Create your own drinks! Yeah!</h3>
+    <h1>Mischer</h1>
+    <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
     
     <form id='newDrink' action='' method='post' accept-charset='UTF-8'>
         <?php
             if (isset($this->model->noNameSet)) {
-               echo "<p style='color:red'>You forgot to chose a name...</p>";
+               echo "<p style='color:red'>Du hast vergessen, dem Drink einen Namen zu geben.</p>";
             }
             
             $content = isset($_COOKIE["input_drinkName"]) ? $_COOKIE["input_drinkName"] : "";
@@ -60,11 +55,16 @@
         <?php
             $content = isset($_COOKIE["input_drinkDescription"]) ? $_COOKIE["input_drinkDescription"] : "";
         ?>
-        <label for='drinkDescription'>Your Description:</label>
+        <label for='drinkDescription'>Beschreibe deinen Drink:</label>
         <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"><?php echo $content ?></textarea> <br/>
-        <input type='submit' name='submit' value='Save Drink'/>
+        <input type='submit' name='submit' value='Vorschau anschauen'/>
     </form>
+    
+
  </div>
 <div class="rightBar">
-    
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

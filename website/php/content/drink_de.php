@@ -141,7 +141,10 @@
 
 </div>
 <div class="rightBar">
-    <h5>Andere neue Drinks:</h5>
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>
 
 

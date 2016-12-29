@@ -17,7 +17,7 @@
  <div class="leftBar">
     <?php
         $ingredientList = new IngredientList();
-        $ingredientList->render($this->model, $allIngredients, $usedIngredients);
+        $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang);
     ?>
 </div>
 <div class="content">
@@ -63,5 +63,8 @@
 
  </div>
 <div class="rightBar">
-    
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

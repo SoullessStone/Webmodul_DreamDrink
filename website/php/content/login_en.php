@@ -24,5 +24,8 @@
     <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Not a member yet? Register here!</a>
 </div>
 <div class="rightBar">
-
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>

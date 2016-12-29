@@ -1,36 +1,38 @@
-<div class="leftBar">
 
+<div class="leftBar">
+    <h4>Suche Drinks nach Inhalt:</h4>
 </div>
 <div class="content">
-    <h1>All drinks</h1>
-    <p>All drinks with your rating!</p>
+    <h1>Alle Drinks</h1>
+    <p>Alle Drinks inkl. deiner Bewertung!</p>
 
-    Suche mit AJAX machen!
-    <table id="drinks">
-        <tbody>
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Description</b></td>
-                <td><b>Creator</b></td>
-                <td><b>Date</b></td>
-                <td><b>Rating</b></td>
-            </tr>
-            <?php
-                foreach ($this->model->getAllDrinksFromDb() as $drink) {
-                    $link = "index.php?site=drink&id=".$drink->getId();
-                    echo "<tr>";
-                    echo "    <td><a href='$link'>".$drink->getName()."</a></td>";
-                    echo "    <td>".$drink->getDescription()."</td>";
-                    echo "    <td>".$drink->getCreatedAt()."</td>";
-                    echo "    <td>".$drink->getCreator()."</td>";
-                    echo "    <td>TODO</td>";
-                    echo "</tr>";
-                } 
-            ?>
-        </tbody>
-    </table>
-
+    <?php
+        $drinklistTable = new DrinklistTable();
+        $drinklistTable->render($this->model);
+    ?>
 </div>
 <div class="rightBar">
-    
+    <?php
+        $drinkSearch = new DrinkSearch();
+        $drinkSearch->render($this->lang);
+    ?>
 </div>
+<script>
+    var modal = document.getElementById("modal");
+    var elem = document.getElementsByClassName("recommend");
+    var span = document.getElementsByClassName("close")[0];
+
+    elem.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
