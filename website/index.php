@@ -1,4 +1,7 @@
 <?php
+    include_once("./php/content/IngredientList.php");
+    include_once("./php/content/DrinklistTable.php");
+    include_once("./php/content/DrinkSearch.php");
     include_once("./php/_controller/DrinkController.php");
     include_once("./php/_controller/AboutController.php");
     include_once("./php/_controller/MixerController.php");
@@ -16,7 +19,8 @@
     $pageId = getCurPage("Home");
     setLanguage($pageId);
     $language = getLanguage();
-    $_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
+    //$_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
+    $_SESSION["baseURL"] = "http://localhost/Webmodul_DreamDrink/website/";
 
     if (! isset($_GET["controller"])){
         header ("Location: ".$_SESSION['baseURL']."Home");
@@ -65,6 +69,8 @@
     <link rel="icon" href="<?php echo $_SESSION['baseURL'].'pic/favicon.ico'; ?>" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Questrial" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
 </head>
 <body>
 
