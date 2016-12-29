@@ -64,11 +64,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta content="initial-scale=1.0" name="viewport">
     <title>Startseite</title>
     <link rel="stylesheet" href="<?php echo $_SESSION['baseURL'].'css/alcoholi.css'; ?>">
+    <link rel="stylesheet" href="<?php echo $_SESSION['baseURL'].'css/font-awesome.css'; ?>">
     <link rel="icon" href="<?php echo $_SESSION['baseURL'].'pic/favicon.ico'; ?>" type="image/x-icon"/>
     <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Questrial" rel="stylesheet">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+
 
     <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
 </head>

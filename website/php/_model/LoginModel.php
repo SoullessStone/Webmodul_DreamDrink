@@ -25,8 +25,12 @@ class LoginModel {
                 }
                 header("location: ".$_SESSION["baseURL"]."Home");
             } else {
-                echo "Keine Daten gefunden.";
-                //header( "Location: index.php?site=about&lang=de" );
+                if (empty($username)) {
+                    header("location: ".$_SESSION["baseURL"]."Login?noUsername");
+                }
+                else {
+                    header("location: ".$_SESSION["baseURL"]."Login?wrongPW");
+                }
             }
         } else {
         }
