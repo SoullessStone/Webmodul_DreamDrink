@@ -1,20 +1,14 @@
 <?php
-    if (! isset($_GET["id"])) {
-        header("location: index.php?site=drinklist");
+    $id = htmlspecialchars($_GET["id"]);
+    if (! isset($id)) {
+        header("location: ".$_SESSION["baseURL"]."Drinklist");
     }
-    $detail_drink_id = $_GET["id"];
-    $res = DbHelper::doQuery("select * from Drink where id = $detail_drink_id;");
-    $detail_drink = $res->fetch_object("Drink");
-    $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = $detail_drink_id);");
-    $imagePath = $imageResult->fetch_assoc()["path"];
-
-    $rateRes = DbHelper::doQuery("select * from Rating where drink_id = $detail_drink_id");
-    $ratingObj = $rateRes->fetch_object("Rating");
-    $rateCountRes = DbHelper::doQuery("select COUNT(*) as rate_Count from Rating where drink_id = $detail_drink_id");
-    $rateCount = $rateCountRes->fetch_assoc()["rate_Count"];
-    if (!empty($ratingObj)) {
-        $rating = $ratingObj->getRating();
-    }
+   $detail_drink = $this->model->getDrinkById($id);
+   if (!isset($detail_drink)) {
+        header("location: ".$_SESSION["baseURL"]."Drinklist");
+   }
+   $imagePath = $this->model->getImagePath($detail_drink->getId());
+   
 
     // TODO Sabine: Bewertung ermöglichen (sehr einfach halten am Anfang)
 ?>
@@ -23,7 +17,7 @@
     <ul>
     <?php
 
-    $detailIngredients = getDetailIngredientsFromDb($detail_drink_id);
+    $detailIngredients = $this->model->getDetailIngredientsFromDb($detail_drink->getId());
         while($ingredient = $detailIngredients->fetch_assoc()) {
             $ing_name = $ingredient["ing_name"];
             $quantity = $ingredient["quantity"];
@@ -43,31 +37,42 @@
     <h3>Beschreibung</h3>
     <div class="drink_description"><p><?php echo $detail_drink->getDescription(); ?></p></div>
 
-    <?php if(!empty($rating)) {
-        $average_rate = $rating / $rateCount;
-    print
-    "<h4 >Bewertung</h4 >
-    <p>Im Durchschnitt geben unsere User dem Drink: $average_rate von fünf Punkten.</p>";
-    }
+    <?php 
+        if (isset($_SESSION["username"])) {
+            $userrating = $this->model->getRatingForDrinkAndUser($detail_drink->getId(), $_SESSION["username"]);
+            if (isset($userrating)) {
+                echo "<p>Du hast den Drink bewertet: " . $userrating->getRating() . "/5 Sternen</p>";
+            } else {
     ?>
-
-    <h5>Drink bewerten</h5>
-    <div class='drink_rating'>
-        <h6>Bewerte diesen Drink</h6>
-        <fieldset id='demo1' class="rating">
-            <input class="stars" type="radio" id="star5" name="rating" value="5" />
-            <label class = "full" for="star5" title="Awesome - 5 stars"></label>
-            <input class="stars" type="radio" id="star4" name="rating" value="4" />
-            <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-            <input class="stars" type="radio" id="star3" name="rating" value="3" />
-            <label class = "full" for="star3" title="Meh - 3 stars"></label>
-            <input class="stars" type="radio" id="star2" name="rating" value="2" />
-            <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-            <input class="stars" type="radio" id="star1" name="rating" value="1" />
-            <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-        </fieldset>
-    </div>
-
+                <div class='drink_rating'>
+                    <h5>Bewerte diesen Drink</h5>
+                    <fieldset id='demo1' class="rating">
+                        <input class="stars" type="radio" id="star5" name="rating" value="5" />
+                        <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input class="stars" type="radio" id="star4" name="rating" value="4" />
+                        <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input class="stars" type="radio" id="star3" name="rating" value="3" />
+                        <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input class="stars" type="radio" id="star2" name="rating" value="2" />
+                        <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input class="stars" type="radio" id="star1" name="rating" value="1" />
+                        <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                    </fieldset>
+                </div><br/>
+    <?php 
+            }
+        }
+    ?>
+    <?php 
+        $sumOfAllRatings =  $this->model->getRatingSumForDrink($id);
+        $rateCount =  $this->model->getRatingCountForDrink($id);
+        if ($rateCount != 0){
+            $average_rate = $sumOfAllRatings / $rateCount;
+            print "<p>Im Durchschnitt geben unsere User dem Drink: $average_rate von fünf Punkten.</p>";
+        } else {
+            echo "<br/><p>Noch keine Bewertungen abgegeben.</p>";
+        }
+    ?>
     <script>
         jQuery(document).ready(function($) {
 
@@ -124,29 +129,18 @@
         $(document).ready(function () {
             $("#demo1 .stars").click(function () {
 
-                $.post('rating.php',{rate:$(this).val()},function(d){
-                    if(d>0)
-                    {
-                        alert('You already rated');
-                    }else{
-                        alert('Thanks For Rating');
-                    }
+                var path = document.getElementById("ajaxurl").value + $(this).val();
+                $.get(path, function(data){
                 });
                 $(this).attr("checked");
             });
         });
     </script>
+    <input id="ajaxurl" hidden type="text" value="<?php echo $_SESSION["baseURL"]."php/ajax/createRating.php?user=".$_SESSION['username']."&drinkId=".$_GET["id"]."&rating="; ?>">
 
 </div>
 <div class="rightBar">
     <h5>Andere neue Drinks:</h5>
 </div>
-
-<?php
-    function getDetailIngredientsFromDb($drink_id) {
-        $dbRes = DbHelper::doQuery("SELECT ing.name as ing_name, ifd.quantity as quantity, uni.name as unit_name FROM ingredients_for_drink ifd INNER JOIN Ingredient ing on ing.id=ifd.ingredient_id INNER JOIN Unit uni on ing.unit = uni.id WHERE ifd.drink_id =2;");
-        return $dbRes;
-    }
-?>
 
 
