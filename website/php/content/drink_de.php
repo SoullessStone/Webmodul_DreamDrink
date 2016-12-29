@@ -131,6 +131,7 @@
 
                 var path = document.getElementById("ajaxurl").value + $(this).val();
                 $.get(path, function(data){
+                    location.reload();
                 });
                 $(this).attr("checked");
             });

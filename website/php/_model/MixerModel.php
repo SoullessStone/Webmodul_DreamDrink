@@ -10,14 +10,20 @@ class MixerModel {
 
     // Anpassen
     function createNewDrinkAndNavigateToIt($postInfo) {
-        if (isset($postInfo["drinkName"]) && strlen($postInfo["drinkName"])>0 
-                && isset($postInfo["drinkDescription"]) && strlen($postInfo["drinkDescription"])>0) {
-            $id = $this->createDrink();
-            foreach ($this->getPostedIngredients($postInfo) as $key => $value) {
-                $this->createDrinkIngredientConnection($id, $key, $value);
-            }
-            unset($_SESSION["usedIngredients"]);
-            header("location: ".$_SESSION["baseURL"]."Mixer");
+        if (isset($postInfo["drinkName"]) && strlen($postInfo["drinkName"])>0) {
+            $_SESSION["drinkName"] = htmlspecialchars($postInfo["drinkName"]);
+            $_SESSION["drinkDescription"] = htmlspecialchars($postInfo["drinkDescription"]);
+            $_SESSION["ingredients"] = $this->getPostedIngredients($postInfo);
+            header("location: ".$_SESSION["baseURL"]."CreateDrink");
+
+            //$id = $this->createDrink();
+            //foreach ($this->getPostedIngredients($postInfo) as $key => $value) {
+            //    $this->createDrinkIngredientConnection($id, $key, $value);
+            //}
+            //unset($_SESSION["usedIngredients"]);
+           // setcookie("input_drinkDescription", "", time()-3600);
+            //setcookie("input_drinkName", "", time()-3600);
+            //header("location: ".$_SESSION["baseURL"]."Drink?id=$id");
         } else {
             header("location: ".$_SESSION["baseURL"]."Mixer/noNameSet");
         }
@@ -30,26 +36,6 @@ class MixerModel {
                 $result[substr($key, 4, strlen($key)-1)] = $value;
         }
         return $result;
-    }
-
-    function createDrink() {
-        $db = $this->db;
-        $drinkName = $db->escape_string($_POST["drinkName"]);
-        $description = $db->escape_string($_POST["drinkDescription"]);
-        $username = $db->escape_string($_SESSION["username"]);
-        $date = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
-        echo "INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');";
-        $res = DbHelper::doQuery("INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');");
-        return $db->insert_id;
-    }
-
-    function createDrinkIngredientConnection($drinkid, $ingredientid, $amount) {
-        $db = $this->db;
-        $drinkid = $db->escape_string($drinkid);
-        $ingredientid = $db->escape_string($ingredientid);
-        $amount = $db->escape_string($amount);
-        echo "INSERT INTO Ingredients_for_Drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);";
-        $res = DbHelper::doQuery("INSERT INTO Ingredients_for_Drink (ingredient_id, drink_id, quantity) VALUES ($ingredientid, $drinkid, $amount);");
     }
 
     function getAllIngredientsFromDb() {
@@ -68,7 +54,6 @@ class MixerModel {
         return array();
     }
 
-    // Anpassen
     public function addNewIngredientIfPresent($i) {
         $allIngredients = $this->getAllIngredientsFromDb();
         $usedIngredients = $this->getUsedIngredients();
@@ -82,7 +67,6 @@ class MixerModel {
         }
     }
 
-    // Anpassen
     function removeNewIngredientIfPresent($i) {
         $allIngredients = $this->getAllIngredientsFromDb();
         $usedIngredients = $this->getUsedIngredients();

@@ -3,6 +3,7 @@
     include_once("./php/content/DrinklistTable.php");
     include_once("./php/content/DrinkSearch.php");
     include_once("./php/_controller/DrinkController.php");
+    include_once("./php/_controller/CreateDrinkController.php");
     include_once("./php/_controller/AboutController.php");
     include_once("./php/_controller/MixerController.php");
     include_once("./php/_controller/HomeController.php");

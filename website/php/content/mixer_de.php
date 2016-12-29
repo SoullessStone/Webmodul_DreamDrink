@@ -57,8 +57,10 @@
         ?>
         <label for='drinkDescription'>Beschreibe deinen Drink:</label>
         <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"><?php echo $content ?></textarea> <br/>
-        <input type='submit' name='submit' value='Drink speichern'/>
+        <input type='submit' name='submit' value='Vorschau anschauen'/>
     </form>
+    
+
  </div>
 <div class="rightBar">
     
