@@ -128,7 +128,6 @@ header .right {
 */
 
 main {
-    flex: 1;
     margin: 110px 5% 10px 5%;
     padding: 20px;
     min-height: 500px;
