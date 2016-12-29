@@ -6,17 +6,8 @@
     <p>Alle Drinks inkl. deiner Bewertung!</p>
 
     Suche mit AJAX machen!
-    <table id="drinks">
-        <tbody>
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Beschreibung</b></td>
-                <td><b>Ersteller</b></td>
-                <td><b>Erstelldatum</b></td>
-                <td><b>Bewertung</b></td>
-            </tr>
+    <div id="drinks">
             <?php
-            $link = $_SESSION["baseURL"]."/pic/recommend_drink.png";
                 foreach ($this->model->getAllDrinksFromDb() as $drink) {
                     $drink_id = $drink->getId();
                     $link = $_SESSION["baseURL"]."Drink?id=".$drink_id;
@@ -31,17 +22,23 @@
                     else
                         $average_rate = 'keine';
 
-                    echo "<tr>";
-                    echo "    <td><a href='$link'>".$drink->getName()."</a></td>";
-                    echo "    <td>".$drink->getDescription()."</td>";
-                    echo "    <td>".$drink->getCreator()."</td>";
-                    echo "    <td>".$drink->getCreatedAt()."</td>";
-                    echo "    <td>".$average_rate."<img src='<?php echo $link; ?>' class='recommend_drink'/></td>";
-                    echo "</tr>";
+                    print
+                        "<div class='container'>
+                            <div class='row'>
+                                <div class='col-left'>
+                                    <a href='{$link}'><h2>{$drink->getName()}</h2></a>
+                                    <p>{$drink->getDescription()}</p>
+                                    <p class='creator'>{$drink->getCreator()} {$drink->getCreatedAt()}</p>
+                                </div>
+                                <div class='col-small'>
+                                    <p>$average_rate <img src='pic/recommend_drink.png' class='recommend_drink'/></p>
+                                 </div>
+                                <div class='col-right'><p>Benötigte Zutaten:</p></div>
+                            </div>
+                        </div>";
                 } 
             ?>
-        </tbody>
-    </table>
+    </div>
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">x</span>
@@ -75,3 +72,9 @@
         }
     }
 </script>
+<?php
+    function getDetailIngredientsFromDb($drink_id) {
+    $dbRes = DbHelper::doQuery("SELECT ing.name as ing_name, ifd.quantity as quantity, uni.name as unit_name FROM ingredients_for_drink ifd INNER JOIN Ingredient ing on ing.id=ifd.ingredient_id INNER JOIN Unit uni on ing.unit = uni.id WHERE ifd.drink_id =2;");
+    return $dbRes;
+    }
+?>
