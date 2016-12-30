@@ -2,7 +2,7 @@
 <div class="leftBar">
     <h4>Suche Drinks nach Inhalt:</h4>
 </div>
-<div class="content">
+<div id="wrapper" class="content">
     <h1>Alle Drinks</h1>
     <p>Alle Drinks inkl. deiner Bewertung!</p>
 
