@@ -1,5 +1,3 @@
-<script>
-</script>
 <div class="leftBar">
     <?php
     ?>
@@ -13,7 +11,7 @@
     <?php
         }
     ?>
-    <form id='login' name="loginForm" action='' method='post' accept-charset='UTF-8' >
+    <form id='login' name="regForm" action='' method='post' accept-charset='UTF-8'>
         <input type='hidden' name='submitted' id='submitted' value='1'/>
         <p>
             <label for='username'>Benutzername:</label>

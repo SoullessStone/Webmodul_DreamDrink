@@ -23,23 +23,26 @@
 </div>
 <div class="content">
     <h1>Login</h1>
+    <?php
+        if (isset($_GET["thanks"])) {
+            echo "<p>Danke für deine Registration!</p>";
+        }
+    ?>
     <form id='login' name="loginForm" action='' method='post' accept-charset='UTF-8' onsubmit="return validateForm();">
-        <fieldset>
-            <legend>Login</legend>
-            <input type='hidden' name='submitted' id='submitted' value='1'/>
-            <p>
-                <label for='username'>Benutzername:</label>
-                <input type='text' name='username' id='username' maxlength="50"/>
-                <span id="usernameError" class="error"><?php if(isset($_GET['noUsername'])) echo 'Bitte Benutzername eingeben'; ?></span>
-            </p>
-            <p>
-                <label for='password'>Passwort:</label>
-                <input type='password' name='password' id='password' maxlength="50"/>
-                <span id="passwordError" class="error"><?php if(isset($_GET['wrongPW'])) echo 'Falsches Passwort'; ?></span>
-            </p>
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
+        <p>
+            <label for='username'>Benutzername:</label>
+            <input type='text' name='username' id='username' maxlength="50"/>
+            <span id="usernameError" class="error"><?php if(isset($_GET['noUsername'])) echo 'Bitte Benutzername eingeben'; ?></span>
+        </p>
+        <p>
+            <label for='password'>Passwort:</label>
+            <input type='password' name='password' id='password' maxlength="50"/>
+            <span id="passwordError" class="error"><?php if(isset($_GET['wrongPW'])) echo 'Falsches Passwort'; ?></span>
+        </p>
 
-            <input type='submit' name='submit' value='Submit'/>
-        </fieldset>
+        <input type='submit' name='submit' value='Submit'/>
+
     </form>
     <br/>
     <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Noch kein Account? Hier registrieren!</a>
