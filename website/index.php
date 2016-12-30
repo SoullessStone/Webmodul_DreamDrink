@@ -22,6 +22,7 @@
     $language = getLanguage();
     //$_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
     $_SESSION["baseURL"] = "http://localhost/Webmodul_DreamDrink/website/";
+    //$_SESSION["baseURL"] = "http://www.hara.kiwi/";
 
     if (! isset($_GET["controller"])){
         header ("Location: ".$_SESSION['baseURL']."Home");

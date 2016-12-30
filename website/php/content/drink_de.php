@@ -137,7 +137,7 @@
             });
         });
     </script>
-    <input id="ajaxurl" hidden type="text" value="<?php echo $_SESSION["baseURL"]."php/ajax/createRating.php?user=".$_SESSION['username']."&drinkId=".$_GET["id"]."&rating="; ?>">
+    <input hidden id="ajaxurl" type="text" value="<?php echo $_SESSION["baseURL"]."php/ajax/createRating.php?user=".$_SESSION['username']."&drinkId=".$_GET["id"]."&rating="; ?>">
 
 </div>
 <div class="rightBar">

@@ -9,8 +9,8 @@ class LoginModel {
 
     public function loginFormSubmitted($postinfo) {
         if (isset($postinfo)) {
-            $pw = $postinfo["password"];
-            $username = $postinfo["username"];
+            $pw = htmlspecialchars($postinfo["password"]);
+            $username = htmlspecialchars($postinfo["username"]);
 
             $param = DbHelper::getInstance()->escape_string($username);
             $dbRes = DbHelper::doQuery("SELECT * FROM User WHERE username='$param';");
