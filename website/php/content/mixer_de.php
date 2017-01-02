@@ -20,7 +20,7 @@
         $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang);
     ?>
 </div>
-<div class="content">
+<div id="mixwrapper" class="content">
     <h1>Mischer</h1>
     <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
     
@@ -32,8 +32,9 @@
             
             $content = isset($_COOKIE["input_drinkName"]) ? $_COOKIE["input_drinkName"] : "";
         ?>
-        <label for='drinkName'>Name deines Drinks:</label>
+        <label for='drinkName'><h4>Name deines Drinks:</h4></label>
         <input type='text' name='drinkName' id='drinkName' maxlength='45' onkeyup='saveInput(drinkName)' value="<?php echo $content ?>" /><br/><br/>
+        <h4>Zutaten (links auswählen):</h4>
         <table id='mixing'>
             <?php
                 foreach ($usedIngredients as $ingredient) {
@@ -55,8 +56,8 @@
         <?php
             $content = isset($_COOKIE["input_drinkDescription"]) ? $_COOKIE["input_drinkDescription"] : "";
         ?>
-        <label for='drinkDescription'>Beschreibe deinen Drink:</label>
-        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"><?php echo $content ?></textarea> <br/>
+        <label for='drinkDescription'><h4>Beschreibe deinen Drink:</h4></label>
+        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500"><?php echo $content ?></textarea> <br/>
         <input type='submit' name='submit' value='Vorschau anschauen'/>
     </form>
     

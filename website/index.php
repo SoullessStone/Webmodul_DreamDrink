@@ -20,8 +20,8 @@
     $pageId = getCurPage("Home");
     setLanguage($pageId);
     $language = getLanguage();
-    //$_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
-    $_SESSION["baseURL"] = "http://localhost/Webmodul_DreamDrink/website/";
+    $_SESSION["baseURL"] = "http://localhost/DreamDrinks/";
+    //$_SESSION["baseURL"] = "http://localhost/Webmodul_DreamDrink/website/";
     //$_SESSION["baseURL"] = "http://www.hara.kiwi/";
 
     if (! isset($_GET["controller"])){
@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="<?php echo $_SESSION['baseURL'].'css/alcoholi.css'; ?>">
     <link rel="stylesheet" href="<?php echo $_SESSION['baseURL'].'css/font-awesome.css'; ?>">
     <link rel="icon" href="<?php echo $_SESSION['baseURL'].'pic/favicon.ico'; ?>" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,700,900|Questrial" rel="stylesheet">
 
 
     <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>

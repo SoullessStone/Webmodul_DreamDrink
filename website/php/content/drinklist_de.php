@@ -4,7 +4,6 @@
 </div>
 <div id="wrapper" class="content">
     <h1>Alle Drinks</h1>
-    <p>Alle Drinks inkl. deiner Bewertung!</p>
 
     <?php
         $drinklistTable = new DrinklistTable();

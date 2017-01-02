@@ -27,3 +27,15 @@ INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Pink
 INSERT INTO `Drink`(`name`, `description`, `creator`) VALUES ('Zucker Ale', 'Vor allem Zucker. Etwas Ginger Ale hinzufügen, fertig!', 'Michel');
     INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (1, 2, 100);
     INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (8, 2, 1);
+    
+INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Cuba Libre', 'Um das Ende des kubanischen Unabhängigkeitskrieges zu feiern bestellte ein US-Soldat kubanischen Rum mit Coca Cola und Limette.Man stieß gemeinsam an und rief „ Cuba Libre“. Freies Cuba und er weltbekannte Longdrink war geboren. <br />-Havana Club', 'Sabine', '2016-12-27');
+    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (5, 5, 1);
+    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (11, 5, 3);
+    INSERT INTO `Image`(`id`, `path`) VALUES ('1', 'cuba_libre.png');
+    INSERT INTO `Images_for_Drink`(`drink_id`, `image_id`) VALUES ('5','1');
+    
+INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Gin-Gin', 'Dieser herb-aromatische Drink kommt bei starken Frauen und kühlen Männern gleich gut an.<br />-Betty Bossi', 'Sabine', '2016-12-27');
+    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (4, 6, 1);
+    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (8, 6, 5);
+    INSERT INTO `Image`(`id`, `path`) VALUES ('2', 'gin-gin.png');
+    INSERT INTO `Images_for_Drink`(`drink_id`, `image_id`) VALUES ('6','2');
