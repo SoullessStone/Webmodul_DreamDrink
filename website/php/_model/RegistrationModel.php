@@ -11,8 +11,13 @@ class RegistrationModel {
         if (isset($postinfo)) {
             $this->saveInputInSession($postinfo);
             $this->validateInput($postinfo);
-            $this->validateUsernameNotAlreadyTaken($postinfo["username"]);
-            $aff_rows = $this->createUser($postinfo["username"], $postinfo["password"], $postinfo["email"], $postinfo["firstname"], $postinfo["lastname"]);
+            $username = htmlspecialchars($postinfo["username"]);
+            $password = htmlspecialchars($postinfo["password"]);
+            $email = htmlspecialchars($postinfo["email"]);
+            $firstname = htmlspecialchars($postinfo["firstname"]);
+            $lastname = htmlspecialchars($postinfo["lastname"]);
+            $this->validateUsernameNotAlreadyTaken($username);
+            $aff_rows = $this->createUser($username, $password, $email, $firstname, $lastname);
             if ($aff_rows == 1) {
                 $this->sendMail(htmlspecialchars($postinfo["email"]), htmlspecialchars($postinfo["homeNation"]), htmlspecialchars($postinfo["username"]));
                 unset($_SESSION["registration_data"]);
@@ -33,16 +38,11 @@ class RegistrationModel {
     }
 
     private function createUser($username, $password, $email, $firstname, $lastname) {
-            $username = htmlspecialchars($username);
             $username = DbHelper::getInstance()->escape_string($username);
-            $password = htmlspecialchars($password);
             $password = DbHelper::getInstance()->escape_string($password);
             $password = password_hash($password,PASSWORD_BCRYPT);
-            $email = htmlspecialchars($email);
             $email = DbHelper::getInstance()->escape_string($email);
-            $firstname = htmlspecialchars($firstname);
             $firstname = DbHelper::getInstance()->escape_string($firstname);
-            $lastname = htmlspecialchars($lastname);
             $lastname = DbHelper::getInstance()->escape_string($lastname);
 
             $res = DbHelper::doQuery("INSERT INTO User (username, password, email, firstname, lastname, isAdmin) VALUES ('$username', '$password', '$email', '$firstname', '$lastname', 0);");
@@ -50,7 +50,6 @@ class RegistrationModel {
     }
 
     private function validateUsernameNotAlreadyTaken($username) {
-            $username = htmlspecialchars($username);
             $param = DbHelper::getInstance()->escape_string($username);
             $dbRes = DbHelper::doQuery("SELECT count(*) as anzahl FROM User WHERE username='$param';");
             $row = $dbRes->fetch_assoc();

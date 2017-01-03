@@ -15,15 +15,6 @@ class MixerModel {
             $_SESSION["drinkDescription"] = htmlspecialchars($postInfo["drinkDescription"]);
             $_SESSION["ingredients"] = $this->getPostedIngredients($postInfo);
             header("location: ".$_SESSION["baseURL"]."CreateDrink");
-
-            //$id = $this->createDrink();
-            //foreach ($this->getPostedIngredients($postInfo) as $key => $value) {
-            //    $this->createDrinkIngredientConnection($id, $key, $value);
-            //}
-            //unset($_SESSION["usedIngredients"]);
-           // setcookie("input_drinkDescription", "", time()-3600);
-            //setcookie("input_drinkName", "", time()-3600);
-            //header("location: ".$_SESSION["baseURL"]."Drink?id=$id");
         } else {
             header("location: ".$_SESSION["baseURL"]."Mixer/noNameSet");
         }
@@ -107,7 +98,8 @@ class MixerModel {
 
     function enrichIngredientWithUnitName($ingredient) {
         $res = array();
-        $param = $this->db->escape_string($ingredient->getUnit());
+        $param = htmlspecialchars($ingredient->getUnit());
+        $param = $this->db->escape_string($param);
         $dbRes = DbHelper::doQuery("select * from Unit where id = $param;");
         $unit = $dbRes->fetch_object("Unit");
         $ingredient->setUnitName($unit->getName());

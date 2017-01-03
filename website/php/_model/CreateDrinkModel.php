@@ -62,9 +62,12 @@ class CreateDrinkModel {
 
     function createDrink() {
         $db = $this->db;
-        $drinkName = $db->escape_string($_SESSION["drinkName"]);
-        $description = $db->escape_string($_SESSION["drinkDescription"]);
-        $username = $db->escape_string($_SESSION["username"]);
+        $drinkName = htmlspecialchars($_SESSION["drinkName"]);
+        $description = htmlspecialchars($_SESSION["drinkDescription"]);
+        $username = htmlspecialchars($_SESSION["username"]);
+        $drinkName = $db->escape_string($drinkName);
+        $description = $db->escape_string($description);
+        $username = $db->escape_string($username);
         $date = getdate()["year"]."-".getdate()["mon"]."-".getdate()["mday"];
         echo "INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');";
         $res = DbHelper::doQuery("INSERT INTO Drink (name, description, creator, createdAt) VALUES ('$drinkName', '$description', '$username', '$date');");
@@ -73,6 +76,9 @@ class CreateDrinkModel {
 
     function createDrinkIngredientConnection($drinkid, $ingredientid, $amount) {
         $db = $this->db;
+        $drinkid = htmlspecialchars($drinkid);
+        $ingredientid = htmlspecialchars($ingredientid);
+        $amount = htmlspecialchars($amount);
         $drinkid = $db->escape_string($drinkid);
         $ingredientid = $db->escape_string($ingredientid);
         $amount = $db->escape_string($amount);

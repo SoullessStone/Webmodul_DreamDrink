@@ -9,13 +9,47 @@ class AdminModel {
 
     public function formSubmitted($postinfo) {
         if (isset($postinfo)) {
-            $name = $this->db->escape_string($_POST["name"]);
-            $image_path = $this->db->escape_string($_POST["imagepath"]);
-            $unit_id = $this->db->escape_string($_POST["unit"]);
-            echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
-            $res = DbHelper::doQuery("INSERT INTO Ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");   
-            header("Location: ".$_SESSION["baseURL"]."Admin");
+            $escape = htmlspecialchars($postinfo["submittedAddimage"]);
+            if (isset($escape) && $escape != "") {
+                $url = htmlspecialchars($postinfo["url"]);
+                $imageName = htmlspecialchars($postinfo["imageName"]);
+                $drink = htmlspecialchars($postinfo["drink"]);
+                $img = "./pic/drinks/$imageName";
+                $fileContent = file_get_contents($url);
+                if ($fileContent === FALSE) {
+                    header("Location: ".$_SESSION["baseURL"]."Admin?failed");
+                } else {$saveResult = file_put_contents($img, $fileContent);
+                    if ($saveResult === FALSE) {
+                        header("Location: ".$_SESSION["baseURL"]."Admin?failed");
+                    } else {
+                        $imageName = $this->db->escape_string($postinfo["imageName"]);
+                        $drink = $this->db->escape_string($postinfo["drink"]);
+                        $imageId = $this->getMaxImageId() + 1;
+                        echo "INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');";
+                        $res = DbHelper::doQuery("INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');");
+                        echo "INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageName);";
+                        $res = DbHelper::doQuery("INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageId);");
+                        header("Location: ".$_SESSION["baseURL"]."Admin");
+                    }
+                }
+                
+            } else {
+                $name = htmlspecialchars($_POST["name"]);
+                $image_path = htmlspecialchars($_POST["imagepath"]);
+                $unit_id = htmlspecialchars($_POST["unit"]);
+                $name = $this->db->escape_string($name);
+                $image_path = $this->db->escape_string($image_path);
+                $unit_id = $this->db->escape_string($unit_id);
+                echo "INSERT INTO ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);";
+                $res = DbHelper::doQuery("INSERT INTO Ingredient (name, image_path, unit) VALUES ('$name', '$image_path', $unit_id);");   
+                header("Location: ".$_SESSION["baseURL"]."Admin");
+            }
         }
+    }
+
+    function getMaxImageId() {
+        $dbRes = DbHelper::doQuery("select max(id) as maximum from Image;");
+        return $dbRes->fetch_assoc()["maximum"];
     }
 
     function getAllUnitsFromDb() {
@@ -45,7 +79,8 @@ class AdminModel {
         if ($this->isIngredientUsed($id)) {
             return;
         }
-        $ingId = $this->db->escape_string($id);
+        $ingId = htmlspecialchars($id);
+        $ingId = $this->db->escape_string($ingId);
         $db = DbHelper::getInstance();
         $res = DbHelper::doQuery("delete from Ingredient where id = '$ingId';");
         if ($res instanceof DbError) {
@@ -54,6 +89,15 @@ class AdminModel {
             echo "noerror";
         }
         header("Location: ".$_SESSION["baseURL"]."Admin");
+    }
+
+    public function getAllDrinksFromDb() {
+        $res = array();
+        $dbRes = DbHelper::doQuery("select * from Drink;");
+        while($drink = $dbRes->fetch_object("Drink")){
+            array_push($res, $drink);
+        }
+        return $res;
     }
 }
 

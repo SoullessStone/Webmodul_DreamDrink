@@ -75,6 +75,58 @@
             ?>
         </tbody>
     </table>
+<br/><br/><br/><br/>
+    <form id='addImage' action='' method='post' accept-charset='UTF-8'>
+        <fieldset>
+            <legend>Bild einem Drink zuordnen</legend>
+            <input type='hidden' name='submittedAddimage' id='submittedAddimage' value='1'/>
+                <?php
+                    $getParam = isset($_GET["failed"]) ? htmlspecialchars($_GET["failed"]) : "";
+                    if (isset($getParam) && $getParam != "") {
+                        echo '<span id="downloadError" class="error">Fehler beim Download des Bildes von der URL</span>';
+                    }
+                ?>
+                <table>
+                    <tr>
+                        <td>
+                            <label for='url'>URL:</label>
+                        </td>
+                        <td>
+                            <input type='text' name='url' id='url' placeholder="http://www.web.ch/image.png"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label for='imageName'>Bild-Name:</label>
+                        </td>
+                        <td>
+                            <input type='text' name='imageName' id='imageName' maxlength="45" placeholder="image.png"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Drink:</label>
+                        </td>
+                        <td>
+                            <select name='drink' id='drink' >
+                                <?php 
+                                    $allDrinks = $this->model->getAllDrinksFromDb();
+                                    usort($allDrinks, function($a, $b)
+                                    {
+                                        return strcmp(strtolower($a->getName()), strtolower($b->getName()));
+                                    });
+                                    foreach ($allDrinks as $drink) {
+                                        echo "<option value='".$drink->getId()."'>'".$drink->getName()."' von " . $drink->getCreator() . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            <input type='submit' name='submit' value='Submit'/>
+        </fieldset>
+    </form>
 
 </div>
 <div class="rightBar">

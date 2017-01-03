@@ -58,7 +58,8 @@
                         <input class="stars" type="radio" id="star1" name="rating" value="1" />
                         <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
                     </fieldset>
-                </div><br/>
+                </div>
+            <br/>
     <?php 
             }
         }
