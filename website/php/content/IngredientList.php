@@ -10,7 +10,11 @@
             $this->translate["Rahm"] = "Cream";
         }
 
-        public function render($model, $allIngredients, $usedIngredients, $lang) {
+        public function render($model, $allIngredients, $usedIngredients, $lang) {            
+            usort($allIngredients, function($a, $b)
+            {
+                return strcmp(strtolower($a->getName()), strtolower($b->getName()));
+            });
             foreach ($allIngredients as $ingredient) {
                 if (! $model->isObjectWithIdInArray($usedIngredients, $ingredient->getId())) {
                     $id = $ingredient->getId();
