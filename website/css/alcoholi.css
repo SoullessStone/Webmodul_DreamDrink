@@ -347,8 +347,6 @@ main .rightBar {
 
 /* Downloaded from http://devzone.co.in/ */
 
-fieldset, label { margin: 0; padding: 0; }
-
 .rating {
     border: none;
     float: left;

@@ -8,6 +8,13 @@
             $this->translate["Rosmarin"] = "Rosemary";
             $this->translate["Orangensaft"] = "Orange juice";
             $this->translate["Rahm"] = "Cream";
+            $this->translate["Pfirsichlikör"] = "Peach liqueur";
+            $this->translate["Minze"] = "Mint";
+            $this->translate["Limette"] = "Lime";
+            $this->translate["Rohrzucker"] = "Raw sugar";
+            $this->translate["Zitronensaft"] = "Lemon juice";
+            $this->translate["Ananassaft"] = "Ananas juice";
+            $this->translate["Cranberrysaft"] = "Cranberry juice";
         }
 
         public function render($model, $allIngredients, $usedIngredients, $lang) {            
