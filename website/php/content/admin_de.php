@@ -5,7 +5,7 @@
 <div class="leftBar">
 
 </div>
-<div class="content">
+<div id="wrapper" class="content">
     <h1>Admin</h1>
     <p>Administriere alles!</p>
 

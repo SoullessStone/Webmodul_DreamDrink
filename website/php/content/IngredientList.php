@@ -17,7 +17,7 @@
             $this->translate["Cranberrysaft"] = "Cranberry juice";
         }
 
-        public function render($model, $allIngredients, $usedIngredients, $lang) {            
+        public function render($model, $allIngredients, $usedIngredients, $lang, $breakrow, $addString) {
             usort($allIngredients, function($a, $b)
             {
                 return strcmp(strtolower($a->getName()), strtolower($b->getName()));
@@ -29,7 +29,10 @@
                     if ($lang == "en" && isset($this->translate[$text])) {
                         $text = $this->translate[$text];
                     }
-                    echo "<label class='choose_ingredient'><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text -></a></label><br/>";
+                    echo "<label class='choose_ingredient'><a href='".$_SESSION["baseURL"]."Mixer/addIngredient=$id'>$text$addString </a></label>";
+                    if ($breakrow) {
+                        echo "<br/>";
+                    }
                 }
             }
         }

@@ -34,11 +34,17 @@
     }
  </script>
  <div class="leftBar">
-    <?php
-        $ingredientList = new IngredientList();
-        $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang);
-    ?>
-</div>
+     <?php
+     $ingredientList = new IngredientList();
+     $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang, true, '&#8594;');
+     ?>
+ </div>
+ <div class="leftBar_top">
+     <?php
+     $ingredientList = new IngredientList();
+     $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang, false, '&#8595;');
+     ?>
+ </div>
 <div id="mixwrapper" class="content">
     <h1>Mischer</h1>
     <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>

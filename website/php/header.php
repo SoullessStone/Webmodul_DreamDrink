@@ -1,12 +1,11 @@
 <?php
     $sites = array(
-        "Home" => array("text_en" => "Home", "text_de" => "Hauptseite"),
         "Mixer" => array("text_en" => "Drink-Mixer", "text_de" => "Drink-Mischer"),
         "Drinklist" => array("text_en" => "All drinks", "text_de" => "Alle Drinks"),
         "About" => array("text_en" => "About DreamDrink", "text_de" => "Über DreamDrink"),
         "Login" => array("text_en" => "Login", "text_de" => "Anmelden"),
         "Registration" => array("text_en" => "Registration", "text_de" => "Registrierung"),
-        "Admin" => array("text_en" => "Admin", "text_de" => "Administration")
+        "Admin" => array("text_en" => "Admin", "text_de" => "Admin")
     );
 ?>
 <header>

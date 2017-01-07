@@ -27,6 +27,23 @@
     ?>
     </ul>
 </div>
+
+<div class="leftBar_top">
+    <h5>Benötigte Zutaten:</h5>
+    <ul>
+        <?php
+
+        $detailIngredients = $this->model->getDetailIngredientsFromDb($detail_drink->getId());
+        while($ingredient = $detailIngredients->fetch_assoc()) {
+            $ing_name = $ingredient["ing_name"];
+            $quantity = $ingredient["quantity"];
+            $unit_name = $ingredient["unit_name"];
+            echo "<li>$ing_name: $quantity $unit_name</li>";
+        }
+        ?>
+    </ul>
+</div>
+
 <div id="wrapper" class="content">
     <h1><?php echo $detail_drink->getName(); ?></h1>
     <?php if(!empty($imagePath)) { ?>
