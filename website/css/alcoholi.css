@@ -259,19 +259,30 @@ main .rightBar {
     display: flex;
 }
 
+#wrapper .drinkheader h4 {
+    margin: 0 0 0 0;
+    padding: 0 0 0 30px;
+}
+
 .col-left {
-    width: 60%;
+    width: 55%;
     margin-right: 2%;
     flex: 1;
 }
 
 .col-small {
-    width: 8%;
+    width: 20%;
+}
+
+#drinks .col-small p {
+    padding-top: 15%;
 }
 
 .col-right {
     width: 20%;
+    vertical-align: middle;
 }
+
 .creator {
     font-size: 0.7em;
 }
@@ -280,9 +291,16 @@ main .rightBar {
     margin: 5px 0 5px 0;
 }
 
+#wrapper h2 {
+    padding-top: 10px;
+}
 #drinks p {
     padding: 0 0 0 30px;
     margin-top: 0;
+}
+
+.img_small {
+    height: 15px;
 }
 
 .modal {

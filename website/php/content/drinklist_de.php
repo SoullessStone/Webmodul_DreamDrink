@@ -2,9 +2,18 @@
 <div class="leftBar">
     <h4>Suche Drinks nach Inhalt:</h4>
 </div>
-<div id="wrapper" class="content">
+<div id="wrapper" class="content drinklist">
     <h1>Alle Drinks</h1>
-
+    <div class='row drinkheader'>
+        <div class='col-left'>
+        </div>
+        <div class='col-small'>
+            <h4>Bewertung</h4>
+        </div>
+        <div class='col-right'>
+            <h4>Zutaten</h4>
+        </div>
+    </div>
     <?php
         $drinklistTable = new DrinklistTable();
         $drinklistTable->render($this->model);
