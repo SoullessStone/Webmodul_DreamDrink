@@ -14,7 +14,7 @@
         <div class="left">
             <?php
                 echo "<a href='./Home'>";
-                echo "<img src='".$_SESSION["baseURL"]."pic/logo.gif' alt='Logo'></a>";
+                echo "<img src='".$_SESSION["baseURL"]."pic/logo.png' alt='Logo'></a>";
 
                 foreach ($sites as $site => $value) {
                     if ($site === "Login" || $site === "Registration") {
