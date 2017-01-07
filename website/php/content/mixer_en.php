@@ -1,7 +1,26 @@
  <?php
- // TODO: Add saved information for drinkname, desc
     if (!isset($_SESSION["loggedIn"]))
         header("location: ".$_SESSION["baseURL"]."Home");
+
+    $translate = array();
+    $translate["Zucker"] = "Sugar";
+    $translate["Zitrone"] = "Lemon";
+    $translate["Rosmarin"] = "Rosemary";
+    $translate["Orangensaft"] = "Orange juice";
+    $translate["Rahm"] = "Cream";
+    $translate["Pfirsichlikör"] = "Peach liqueur";
+    $translate["Minze"] = "Mint";
+    $translate["Limette"] = "Lime";
+    $translate["Rohrzucker"] = "Raw sugar";
+    $translate["Zitronensaft"] = "Lemon juice";
+    $translate["Ananassaft"] = "Ananas juice";
+    $translate["Cranberrysaft"] = "Cranberry juice";
+    $translateUnit = array();
+    $translateUnit["Einheit"] = "unit";
+    $translateUnit["Stück"] = "piece";
+    $translateUnit["Gramm"] = "gram";
+    $translateUnit["Deziliter"] = "deciliter";
+    $translateUnit["Zentiliter"] = "centiliter";
 
     $allIngredients = $this->model->getAllIngredientsFromDb();
     $usedIngredients = $this->model->getUsedIngredients();
@@ -40,7 +59,12 @@
                         $id = $ingredient->getId();
                         $name = $ingredient->getName();
                         $unit = $ingredient->getUnitName();
-
+                        if ($this->lang == "en" && isset($translate[$name])) {
+                            $name = $translate[$name];
+                        }
+                        if ($this->lang == "en" && isset($translateUnit[$unit])) {
+                            $unit = $translateUnit[$unit];
+                        }
                         $inputId = "ing_$id";
                         $content = isset($_COOKIE["input_".$inputId]) ? $_COOKIE["input_".$inputId] : "1";
                         echo "<tr>";
