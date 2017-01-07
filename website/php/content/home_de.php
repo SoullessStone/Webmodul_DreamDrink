@@ -1,10 +1,8 @@
 <?php
-    $res = DbHelper::doQuery("select * from Drink where id = 1;");
-    $recent_drink = $res->fetch_object("Drink");
-    $recent_drink_id = $recent_drink->getId();
-    $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = 1);");
-    $imagePath = $imageResult->fetch_assoc()["path"];
-    $link = $_SESSION["baseURL"]."Drink?id=".$recent_drink_id;
+    $newestDrinkid = $this->model->getIdOfNewestDrinkWithImage();
+    $recent_drink = $this->model->getDrink($newestDrinkid);
+    $imagePath = $this->model->getImagePathForDrink($newestDrinkid);
+    $link = $_SESSION["baseURL"]."Drink?id=".$newestDrinkid;
 ?>
 <div class="leftBar">
     <h4>Neuster Drink:</h4>
@@ -14,9 +12,16 @@
     </div>
 
 </div>
-<div class="content">
-    <h1>DE</h1>
-  <p>Homehomehome</p>
+<div class="content" id="wrapper">
+    <h1>Willkommen bei DreamDrink!</h1>
+  <p style="text-align:center">
+  <img src="<?php echo $_SESSION["baseURL"].'/pic/drinks.jpg'; ?>" alt="Drinks" style="width:100%"/><br/><br/>
+    <?php
+        echo "Wir haben " . $this->model->getDrinkCount() . " Drinks!<br/><br/>";
+        echo "Gemacht aus " . $this->model->getIngredientCount() . " Zutaten!<br/><br/>";
+        echo "Erstellt von " . $this->model->getUserCount() . " Benutzer!<br/><br/>";
+    ?>
+  </p>
 
 
 </div>

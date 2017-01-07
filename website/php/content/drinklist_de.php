@@ -1,4 +1,10 @@
+<script>
 
+$(function() {
+    var rows = document.getElementByClassName("container");
+});
+
+</script>
 <div class="leftBar">
     <h4>Suche Drinks nach Inhalt:</h4>
 </div>
@@ -16,7 +22,7 @@
     </div>
     <?php
         $drinklistTable = new DrinklistTable();
-        $drinklistTable->render($this->model);
+        $drinklistTable->render($this->model, $this->lang);
     ?>
 </div>
 <div class="rightBar">

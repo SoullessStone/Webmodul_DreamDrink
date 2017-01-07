@@ -8,7 +8,7 @@
 
     <?php
         $drinklistTable = new DrinklistTable();
-        $drinklistTable->render($this->model);
+        $drinklistTable->render($this->model, $this->lang);
     ?>
 </div>
 <div class="rightBar">
