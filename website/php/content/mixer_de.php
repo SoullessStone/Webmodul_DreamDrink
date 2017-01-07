@@ -1,5 +1,4 @@
  <?php
- // TODO: Add saved information for drinkname, desc
     if (!isset($_SESSION["loggedIn"]))
         header("location: ".$_SESSION["baseURL"]."Home");
 
