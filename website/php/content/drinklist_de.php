@@ -1,12 +1,64 @@
 <script>
+    var filterArray = [];
+    $(function() {
+    });
 
-$(function() {
-    var rows = document.getElementByClassName("container");
-});
+    function filterDrink(filterWord) {
+        var index = filterArray.indexOf(filterWord.text);
+        if (index===-1) {
+            filterArray[filterArray.length] = filterWord.text;
+            filterWord.classList.add("activeFilter");
+        } else {
+            filterArray.splice(index, 1);
+            filterWord.classList.remove("activeFilter");
+        }
+        console.log(filterArray);
+        applyFilters();
+    }
+
+    function applyFilters() {
+        $(".container").hide();
+        if (filterArray.length === 0) {
+            $(".container").show();
+        } else {
+            $.each(filterArray, function(i, v){
+                $(".container").filter(":contains('" + v + "')").show();
+            });
+        }
+    }
 
 </script>
+<style>
+    .linkable {
+        cursor: pointer;
+    }
+    .activeFilter {
+        text-decoration: underline;
+    }
+</style>
 <div class="leftBar">
     <h4>Suche Drinks nach Inhalt:</h4>
+    <p id="filterOptions">
+    </p>
+        <a id="filter_Gin" onclick="filterDrink(filter_Gin)" class="linkable">Gin</a>
+        <a id="filter_Rum" onclick="filterDrink(filter_Rum)" class="linkable">Rum</a>
+        <a id="filter_Vodka" onclick="filterDrink(filter_Vodka)" class="linkable">Vodka</a>
+        <a id="filter_Whiskey" onclick="filterDrink(filter_Whiskey)" class="linkable">Whiskey</a>
+        <a id="filter_Cachaca" onclick="filterDrink(filter_Cachaca)" class="linkable">Cachaça</a>
+        <a id="filter_Cream" onclick="filterDrink(filter_Cream)" class="linkable">Cream of Coconut</a>
+        <a id="filter_Pfirsich" onclick="filterDrink(filter_Pfirsich)" class="linkable">Pfirsichlikör</a>
+</div>
+<div class="leftBar_top">
+    <h4>Suche Drinks nach Inhalt:</h4>
+    <p id="filterOptions">
+    </p>
+        <a id="filter_Gin1" onclick="filterDrink(filter_Gin1)" class="linkable">Gin</a>
+        <a id="filter_Rum1" onclick="filterDrink(filter_Rum1)" class="linkable">Rum</a>
+        <a id="filter_Vodka1" onclick="filterDrink(filter_Vodka1)" class="linkable">Vodka</a>
+        <a id="filter_Whiskey1" onclick="filterDrink(filter_Whiskey1)" class="linkable">Whiskey</a>
+        <a id="filter_Cachaca1" onclick="filterDrink(filter_Cachaca1)" class="linkable">Cachaça</a>
+        <a id="filter_Cream1" onclick="filterDrink(filter_Cream1)" class="linkable">Cream of Coconut</a>
+        <a id="filter_Pfirsich1" onclick="filterDrink(filter_Pfirsich1)" class="linkable">Pfirsichlikör</a>
 </div>
 <div id="wrapper" class="content drinklist">
     <h1>Alle Drinks</h1>

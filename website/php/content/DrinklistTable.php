@@ -71,6 +71,7 @@
                                 </div>";
                         } 
                     ?>
+                    <br/>
                 </div>
                 <div id="modal" class="modal">
                     <div class="modal-content">
