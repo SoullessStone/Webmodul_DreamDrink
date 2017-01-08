@@ -1,21 +1,26 @@
 <?php
-    $res = DbHelper::doQuery("select * from Drink where id = 1;");
-    $recent_drink = $res->fetch_object("Drink");
-    $recent_drink_id = $recent_drink->getId();
-    $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = 1);");
-    $imagePath = $imageResult->fetch_assoc()["path"];
+    $newestDrinkid = $this->model->getIdOfNewestDrinkWithImage();
+    $recent_drink = $this->model->getDrink($newestDrinkid);
+    $imagePath = $this->model->getImagePathForDrink($newestDrinkid);
+    $link = $_SESSION["baseURL"]."Drink?id=".$newestDrinkid;
 ?>
 <div class="leftBar">
-    <h4>Newest drink</h4>
-    <a href="index.php?site=drink&id=<?php echo $recent_drink_id; ?>"><h3><?php echo $recent_drink->getName(); ?></h3></a>
+    <h4>Newest Drink</h4>
+    <a href="<?php echo $_SESSION["baseURL"]."Drink?id=".$newestDrinkid; ?>"><h3><?php echo $recent_drink->getName(); ?></h3></a>
     <div class="side_image">
         <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath; ?>" alt="<?php echo $recent_drink->getName(); ?>" />
     </div>
-
 </div>
-<div class="content">
-    <h1>EN</h1>
-  <p>Homehomehome</p>
+<div class="content" id="wrapper">
+    <h1>Welcome to DreamDrink!</h1>
+  <p style="text-align:center">
+  <img src="<?php echo $_SESSION["baseURL"].'/pic/drinks.jpg'; ?>" alt="Drinks" style="width:100%"/><br/><br/>
+    <?php
+        echo "We've got " . $this->model->getDrinkCount() . " drinks!<br/><br/>";
+        echo "Made of " . $this->model->getIngredientCount() . " Ingredients!<br/><br/>";
+        echo "Created by " . $this->model->getUserCount() . " users!<br/><br/>";
+    ?>
+  </p>
 
 
 </div>

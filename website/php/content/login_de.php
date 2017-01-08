@@ -21,7 +21,7 @@
 <div class="leftBar">
 
 </div>
-<div class="content">
+<div id="wrapper" class="content">
     <h1>Login</h1>
     <?php
         if (isset($_GET["thanks"])) {
@@ -34,18 +34,15 @@
             <label for='username'>Benutzername:</label>
             <input type='text' name='username' id='username' maxlength="50"/>
             <span id="usernameError" class="error"><?php if(isset($_GET['noUsername'])) echo 'Bitte Benutzername eingeben'; ?></span>
-        </p>
-        <p>
             <label for='password'>Passwort:</label>
             <input type='password' name='password' id='password' maxlength="50"/>
             <span id="passwordError" class="error"><?php if(isset($_GET['wrongPW'])) echo 'Falsches Passwort'; ?></span>
+
+            <input type='submit' name='submit' value='Submit'/>
         </p>
 
-        <input type='submit' name='submit' value='Submit'/>
-
     </form>
-    <br/>
-    <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Noch kein Account? Hier registrieren!</a>
+    <p><a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">Noch kein Account? Hier registrieren!</a></p>
 </div>
 <div class="rightBar">
     <?php

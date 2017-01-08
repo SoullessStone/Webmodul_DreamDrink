@@ -10,18 +10,44 @@
    $imagePath = $this->model->getImagePath($detail_drink->getId());
    
 
+    $translate = array();
+    $translate["Zucker"] = "Sugar";
+    $translate["Zitrone"] = "Lemon";
+    $translate["Rosmarin"] = "Rosemary";
+    $translate["Orangensaft"] = "Orange juice";
+    $translate["Rahm"] = "Cream";
+    $translate["Pfirsichlikör"] = "Peach liqueur";
+    $translate["Minze"] = "Mint";
+    $translate["Limette"] = "Lime";
+    $translate["Rohrzucker"] = "Raw sugar";
+    $translate["Zitronensaft"] = "Lemon juice";
+    $translate["Ananassaft"] = "Ananas juice";
+    $translate["Cranberrysaft"] = "Cranberry juice";
+    $translateUnit = array();
+    $translateUnit["Einheit"] = "unit";
+    $translateUnit["Stück"] = "piece";
+    $translateUnit["Gramm"] = "gram";
+    $translateUnit["Deziliter"] = "deciliter";
+    $translateUnit["Zentiliter"] = "centiliter";
+
     // TODO Sabine: Bewertung ermöglichen (sehr einfach halten am Anfang)
 ?>
 <div class="leftBar">
-    <h5>Benötigte Zutaten:</h5>
+    <h5>Ingredients:</h5>
     <ul>
     <?php
 
     $detailIngredients = $this->model->getDetailIngredientsFromDb($detail_drink->getId());
         while($ingredient = $detailIngredients->fetch_assoc()) {
             $ing_name = $ingredient["ing_name"];
+            if ($this->lang == "en" && isset($translate[$ing_name])) {
+                $ing_name = $translate[$ing_name];
+            }
             $quantity = $ingredient["quantity"];
             $unit_name = $ingredient["unit_name"];
+            if ($this->lang == "en" && isset($translateUnit[$unit_name])) {
+                $unit_name = $translateUnit[$unit_name];
+            }
             echo "<li>$ing_name: $quantity $unit_name</li>";
         }
     ?>
@@ -34,18 +60,18 @@
             <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath ?>" alt="<?php echo $detail_drink->getName(); ?>" class="lightbox_trigger" />
         </div>
     <?php } ?>
-    <h3>Beschreibung</h3>
+    <h3>Description (in user language)</h3>
     <div class="drink_description"><p><?php echo $detail_drink->getDescription(); ?></p></div>
 
     <?php 
         if (isset($_SESSION["username"])) {
             $userrating = $this->model->getRatingForDrinkAndUser($detail_drink->getId(), $_SESSION["username"]);
             if (isset($userrating)) {
-                echo "<p>Du hast den Drink bewertet: " . $userrating->getRating() . "/5 Sternen</p>";
+                echo "<p>You rated this drink: " . $userrating->getRating() . "/5 stars</p>";
             } else {
     ?>
                 <div class='drink_rating'>
-                    <h5>Bewerte diesen Drink</h5>
+                    <h5>Rate this drink</h5>
                     <fieldset id='demo1' class="rating">
                         <input class="stars" type="radio" id="star5" name="rating" value="5" />
                         <label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -68,9 +94,9 @@
         $rateCount =  $this->model->getRatingCountForDrink($id);
         if ($rateCount != 0){
             $average_rate = $sumOfAllRatings / $rateCount;
-            print "<p>Im Durchschnitt geben unsere User dem Drink: $average_rate von fünf Punkten.</p>";
+            print "<p>On average users give this drink: $average_rate of 5 stars.</p>";
         } else {
-            echo "<br/><p>Noch keine Bewertungen abgegeben.</p>";
+            echo "<br/><p>No ratings yet</p>";
         }
     ?>
     <script>
@@ -137,7 +163,7 @@
             });
         });
     </script>
-    <input id="ajaxurl" hidden type="text" value="<?php echo $_SESSION["baseURL"]."php/ajax/createRating.php?user=".$_SESSION['username']."&drinkId=".$_GET["id"]."&rating="; ?>">
+    <input id="ajaxurl" style="display:none;"  type="text" value="<?php echo $_SESSION["baseURL"]."php/ajax/createRating.php?user=".$_SESSION['username']."&drinkId=".$_GET["id"]."&rating="; ?>">
 
 </div>
 <div class="rightBar">

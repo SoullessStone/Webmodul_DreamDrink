@@ -1,5 +1,23 @@
 <?php
-   
+    $translate = array();
+    $translate["Zucker"] = "Sugar";
+    $translate["Zitrone"] = "Lemon";
+    $translate["Rosmarin"] = "Rosemary";
+    $translate["Orangensaft"] = "Orange juice";
+    $translate["Rahm"] = "Cream";
+    $translate["Pfirsichlikör"] = "Peach liqueur";
+    $translate["Minze"] = "Mint";
+    $translate["Limette"] = "Lime";
+    $translate["Rohrzucker"] = "Raw sugar";
+    $translate["Zitronensaft"] = "Lemon juice";
+    $translate["Ananassaft"] = "Ananas juice";
+    $translate["Cranberrysaft"] = "Cranberry juice";
+    $translateUnit = array();
+    $translateUnit["Einheit"] = "unit";
+    $translateUnit["Stück"] = "piece";
+    $translateUnit["Gramm"] = "gram";
+    $translateUnit["Deziliter"] = "deciliter";
+    $translateUnit["Zentiliter"] = "centiliter";
 ?>
 <div class="leftBar">
     <h5>Benötigte Zutaten:</h5>
@@ -43,7 +61,7 @@
             <input class="stars" type="radio" id="star1" name="rating" value="1" />
             <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
         </fieldset>
-    </div><br/>
+    </div><br/><br/>
     <p>Im Durchschnitt geben unsere User dem Drink: 5/5 Sterne.</p>
 </div>
 <div class="rightBar">

@@ -34,25 +34,32 @@
     }
  </script>
  <div class="leftBar">
-    <?php
-        $ingredientList = new IngredientList();
-        $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang);
-    ?>
-</div>
-<div class="content">
-    <h1>Mischer</h1>
-    <h3>Hier kannst du eigene Drinks zusammenstellen.</h3>
+     <?php
+     $ingredientList = new IngredientList();
+     $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang, true, '&#8594;');
+     ?>
+ </div>
+ <div class="leftBar_top">
+     <?php
+     $ingredientList = new IngredientList();
+     $ingredientList->render($this->model, $allIngredients, $usedIngredients, $this->lang, false, '&#8595;');
+     ?>
+ </div>
+<div id="mixwrapper" class="content">
+    <h1>Mixer</h1>
+    <h3>Create your own drinks</h3>
     
     <form id='newDrink' action='' method='post' accept-charset='UTF-8'>
         <?php
             if (isset($this->model->noNameSet)) {
-               echo "<p style='color:red'>Du hast vergessen, dem Drink einen Namen zu geben.</p>";
+               echo "<p style='color:red'>Name your creation.</p>";
             }
             
             $content = isset($_COOKIE["input_drinkName"]) ? $_COOKIE["input_drinkName"] : "";
         ?>
-        <label for='drinkName'>Name deines Drinks:</label>
+        <label for='drinkName'><h4>Name:</h4></label>
         <input type='text' name='drinkName' id='drinkName' maxlength='45' onkeyup='saveInput(drinkName)' value="<?php echo $content ?>" /><br/><br/>
+        <h4>Ingredients (chose on the left/top):</h4>
         <table id='mixing'>
             <?php
                 foreach ($usedIngredients as $ingredient) {
@@ -65,6 +72,7 @@
                         if ($this->lang == "en" && isset($translateUnit[$unit])) {
                             $unit = $translateUnit[$unit];
                         }
+
                         $inputId = "ing_$id";
                         $content = isset($_COOKIE["input_".$inputId]) ? $_COOKIE["input_".$inputId] : "1";
                         echo "<tr>";
@@ -79,9 +87,9 @@
         <?php
             $content = isset($_COOKIE["input_drinkDescription"]) ? $_COOKIE["input_drinkDescription"] : "";
         ?>
-        <label for='drinkDescription'>Beschreibe deinen Drink:</label>
-        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500" style="width: 100%; height: 100px;"><?php echo $content ?></textarea> <br/>
-        <input type='submit' name='submit' value='Vorschau anschauen'/>
+        <label for='drinkDescription'><h4>Description:</h4></label>
+        <textarea name="drinkDescription" id="drinkDescription" onkeyup="saveInput(drinkDescription)" maxlength="500"><?php echo $content ?></textarea> <br/>
+        <input type='submit' name='submit' value='See preview'/>
     </form>
     
 

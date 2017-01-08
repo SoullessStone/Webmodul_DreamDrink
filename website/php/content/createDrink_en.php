@@ -1,8 +1,26 @@
 <?php
-   
+    $translate = array();
+    $translate["Zucker"] = "Sugar";
+    $translate["Zitrone"] = "Lemon";
+    $translate["Rosmarin"] = "Rosemary";
+    $translate["Orangensaft"] = "Orange juice";
+    $translate["Rahm"] = "Cream";
+    $translate["Pfirsichlikör"] = "Peach liqueur";
+    $translate["Minze"] = "Mint";
+    $translate["Limette"] = "Lime";
+    $translate["Rohrzucker"] = "Raw sugar";
+    $translate["Zitronensaft"] = "Lemon juice";
+    $translate["Ananassaft"] = "Ananas juice";
+    $translate["Cranberrysaft"] = "Cranberry juice";
+    $translateUnit = array();
+    $translateUnit["Einheit"] = "unit";
+    $translateUnit["Stück"] = "piece";
+    $translateUnit["Gramm"] = "gram";
+    $translateUnit["Deziliter"] = "deciliter";
+    $translateUnit["Zentiliter"] = "centiliter";
 ?>
 <div class="leftBar">
-    <h5>Benötigte Zutaten:</h5>
+    <h5>Ingredients:</h5>
     <ul>
     <?php
         $allIngredients = $this->model->getAllIngredientsFromDb();
@@ -11,7 +29,15 @@
             if ($this->model->isObjectWithIdInArray($allIngredients, $key)) {
                 $curIngredient = $this->model->findItemById($allIngredients, $key);
                 $this->model->enrichIngredientWithUnitName($curIngredient);
-                echo $curIngredient->getName() . " - " . $value . " " . $curIngredient->getUnitName() . "<br/>";
+                $ingname = $curIngredient->getName();
+                if ($this->lang == "en" && isset($translate[$ingname])) {
+                    $ingname = $translate[$ingname];
+                }
+                $unitname = $curIngredient->getUnitName();
+                if ($this->lang == "en" && isset($translateUnit[$unitname])) {
+                    $unitname = $translateUnit[$unitname];
+                }
+                echo $ingname . " - " . $value . " " . $unitname . "<br/>";
             }
         }
     ?>
@@ -20,17 +46,17 @@
 <div id="wrapper" class="content">
 
      <?php
-        echo "<p><img src='".$_SESSION["baseURL"]."pic/save.png' alt='Save' style='width:2%;'> <a href='".$_SESSION["baseURL"]."CreateDrink?action=persist"."'>Passt so - Speichern!</a><br/>";
-        echo "<a href='".$_SESSION["baseURL"]."Mixer"."'>Da fehlt noch was, zurück zum Mixer!</a></p>";
+        echo "<p><img src='".$_SESSION["baseURL"]."pic/save.png' alt='Save' style='width:2%;'> <a href='".$_SESSION["baseURL"]."CreateDrink?action=persist"."'>All rigth - save!</a><br/>";
+        echo "<a href='".$_SESSION["baseURL"]."Mixer"."'>Something's missing, back to the mixer!</a></p>";
     ?>
 
     <h1><?php echo $_SESSION["drinkName"]; ?></h1>
-    <h3>Beschreibung</h3>
+    <h3>Description</h3>
     <div class="drink_description"><p><?php echo $_SESSION["drinkDescription"]; ?></p></div>
 
 
     <div class='drink_rating'>
-        <h5>Bewerte diesen Drink</h5>
+        <h5>Rate this drink</h5>
         <fieldset id='demo1' class="rating">
             <input class="stars" type="radio" id="star5" name="rating" value="5" />
             <label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -43,8 +69,8 @@
             <input class="stars" type="radio" id="star1" name="rating" value="1" />
             <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
         </fieldset>
-    </div><br/>
-    <p>Im Durchschnitt geben unsere User dem Drink: 5/5 Sterne.</p>
+    </div><br/><br/>
+    <p>On average, this drink is rated: 5/5 Stars.</p>
 </div>
 <div class="rightBar">
 </div>

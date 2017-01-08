@@ -26,6 +26,7 @@ INSERT INTO `Ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Cra
 INSERT INTO `Ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Pfirsichlikör', NULL, '1');
 INSERT INTO `Ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Creme de noyaux', NULL, '1');
 INSERT INTO `Ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Creme de cocoa', NULL, '1');
+INSERT INTO `Ingredient` (`id`, `name`, `image_path`, `unit`) VALUES (NULL, 'Cola', NULL, '1');
 
 
 INSERT INTO `User` (`username`, `password`, `email`, `firstname`, `lastname`, `isAdmin`) VALUES ('Michel', '$2y$10$fgk5gIvxH83bK0LAjg5RJuzKFyY.q4ORhAbQyP1P4aEv2QOsOx6eG', 'michel', 'Michel', 'Uz', '1');
@@ -49,7 +50,7 @@ INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Mosc
     
 INSERT INTO `Drink`(`name`, `description`, `creator`, `createdAt`) VALUES ('Cuba Libre', 'Um das Ende des kubanischen Unabhängigkeitskrieges zu feiern bestellte ein US-Soldat kubanischen Rum mit Coca Cola und Limette.Man stieß gemeinsam an und rief „ Cuba Libre“. Freies Cuba und er weltbekannte Longdrink war geboren. <br />-Havana Club', 'Sabine', '2016-12-27');
     INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (5, 3, 1);
-    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (10, 3, 3);
+    INSERT INTO `Ingredients_for_Drink` (`ingredient_id`, `drink_id`, `quantity`) VALUES (23, 3, 3);
     INSERT INTO `Image`(`id`, `path`) VALUES ('1', 'cuba_libre.png');
     INSERT INTO `Images_for_Drink`(`drink_id`, `image_id`) VALUES ('3','1');
     

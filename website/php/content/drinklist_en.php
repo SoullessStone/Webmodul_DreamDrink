@@ -37,7 +37,7 @@
     }
 </style>
 <div class="leftBar">
-    <h4>Suche Drinks nach Inhalt:</h4>
+    <h4>Filter Drinks</h4>
     <p id="filterOptions">
     </p>
         <a id="filter_Gin" onclick="filterDrink(filter_Gin)" class="linkable">Gin</a>
@@ -49,15 +49,15 @@
         <a id="filter_Pfirsich" onclick="filterDrink(filter_Pfirsich)" class="linkable">Peach liqueur</a>
 </div>
 <div id="wrapper" class="content drinklist">
-    <h1>Alle Drinks</h1>
+    <h1>All drinks</h1>
     <div class='row drinkheader'>
         <div class='col-left'>
         </div>
         <div class='col-small'>
-            <h4>Bewertung</h4>
+            <h4>Rating</h4>
         </div>
         <div class='col-right'>
-            <h4>Zutaten</h4>
+            <h4>Ingredients</h4>
         </div>
     </div>
     <?php
