@@ -164,6 +164,7 @@ main .content {
     position: relative;
     margin-left: 17%;
     z-index: 1;
+    margin-top: 40px;
 }
 
 .big_image > img.lightbox_trigger {
@@ -541,6 +542,7 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+
 @media (max-width: 1000px) {
     main .leftBar {
         left: -40px;
@@ -629,9 +631,8 @@ tr:nth-child(even) {
     header img {
         height: 60%;
     }
-    .leftBar_top {
-        margin-top: 35px;
-        width: 100%;
+    div .leftBar_top {
+        margin-top: 40px;
     }
     header, nav a {
         top: 0;
