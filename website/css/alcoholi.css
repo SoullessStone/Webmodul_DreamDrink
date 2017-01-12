@@ -468,26 +468,18 @@ input[type=submit]:hover {
 .registration label {
     padding-right: 2%;
 }
-.registration .col-left, .registration .col-right {
-    width: 50%;
-}
-
-.registration .col-left {
-    flex: 1;
-    margin-left: 3%;
-}
-
-.registration .row .col-left input[type=text] {
-    min-width: 30%;
-}
 
 .registration select {
-    height: 37px;
-    width: 100px;
+    height: 45px;
+    width: 200px;
 }
 
 .registration input[type=submit] {
     margin-left: 3%;
+}
+
+.registration p {
+    padding-top: 0;
 }
 
 /*
