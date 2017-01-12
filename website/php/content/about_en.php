@@ -1,21 +1,8 @@
-<?php
-    $newestDrinkid = $this->model->getIdOfNewestDrinkWithImage();
-    $recent_drink = $this->model->getDrink($newestDrinkid);
-    $imagePath = $this->model->getImagePathForDrink($newestDrinkid);
-    $link = $_SESSION["baseURL"]."Drink?id=".$newestDrinkid;
-?>
 <div class="leftBar">
-    <h4>Newest Drink:</h4>
-    <a href="<?php echo $_SESSION["baseURL"]."Drink?id=".$newestDrinkid; ?>"><h3><?php echo $recent_drink->getName(); ?></h3></a>
-    <div class="side_image">
-        <img src="<?php echo $_SESSION["baseURL"].'/pic/Drinks/'.$imagePath; ?>" alt="<?php echo $recent_drink->getName(); ?>" />
-    </div>
+
 </div>
 <div id="wrapper" class="content">
-    <h1>About us</h1>
-    <p>We want the best drinks!
-    </p>
-    
+    <h1>About</h1>
     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
     labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
     Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
@@ -30,7 +17,6 @@
     duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
     nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 </div>
-
 <div class="rightBar">
     <?php
         $drinkSearch = new DrinkSearch();
