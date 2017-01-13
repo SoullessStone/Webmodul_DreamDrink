@@ -18,7 +18,7 @@
     <?php
         echo "Wir haben " . $this->model->getDrinkCount() . " Drinks!<br/><br/>";
         echo "Gemacht aus " . $this->model->getIngredientCount() . " Zutaten!<br/><br/>";
-        echo "Erstellt von " . $this->model->getUserCount() . " Benutzer!<br/><br/>";
+        echo "Erstellt von " . $this->model->getUserCount() . " Benutzern!<br/><br/>";
     ?>
   </p>
 
