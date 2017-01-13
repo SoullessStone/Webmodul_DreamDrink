@@ -89,7 +89,7 @@
         <input type='submit' name='submit' value='Submit'/>
     </form>
     <br/>
-    <p><a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">No account yet? Register here!</a></p>
+    <a href="<?php echo $_SESSION['baseURL'].'Registration'; ?>">No account yet? Register here!</a>
 </div>
 <div class="rightBar">
     <?php
