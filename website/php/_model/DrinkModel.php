@@ -25,7 +25,7 @@ class DrinkModel {
     public function getImagePath($id) {
         $id = htmlspecialchars($id);
         $id = $this->db->escape_string($id);
-        $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = $id);");
+        $imageResult = DbHelper::doQuery("select path from Image where id = (select image_id from Images_for_Drink where drink_id = $id limit 1);");
         $imagePath = $imageResult->fetch_assoc()["path"];
         return $imagePath;
     }

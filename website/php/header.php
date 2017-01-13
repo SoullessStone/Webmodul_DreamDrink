@@ -41,8 +41,12 @@
             <?php
             $cssDe = $language === "de" ? "class='selectedLang'" : "";
             $cssEn = $language === "en" ? "class='selectedLang'" : "";
-            echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=de' $cssDe>DE</a>";
-            echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=en' $cssEn>EN</a>";
+            $drinkid = "";
+            if ($pageId === "Drink") {
+                $drinkid = $_GET["id"];
+            }
+            echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=de&id=$drinkid' $cssDe>DE</a>";
+            echo "<a href='".$_SESSION['baseURL'].$pageId."?lang=en&id=$drinkid' $cssEn>EN</a>";
 
             $cssClass = "";
             if ($pageId === $site) {

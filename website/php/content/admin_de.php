@@ -6,6 +6,12 @@
 
 </div>
 <div id="wrapper" class="content">
+    <?php
+        if (isset($_GET["failed"])) {
+            echo '<span id="downloadError" class="error">Fehler beim Download des Bildes von der URL</span>';
+        }
+    ?>
+
     <h1>Admin</h1>
     <p>Administriere alles!</p>
 
@@ -76,32 +82,17 @@
         </tbody>
     </table>
 <br/><br/><br/><br/>
-    <form id='addImage' action='' method='post' accept-charset='UTF-8'>
+    <form id='addImage' action='' method='post' accept-charset='UTF-8' enctype="multipart/form-data">
         <fieldset>
             <legend>Bild einem Drink zuordnen</legend>
             <input type='hidden' name='submittedAddimage' id='submittedAddimage' value='1'/>
-                <?php
-                    $getParam = isset($_GET["failed"]) ? htmlspecialchars($_GET["failed"]) : "";
-                    if (isset($getParam) && $getParam != "") {
-                        echo '<span id="downloadError" class="error">Fehler beim Download des Bildes von der URL</span>';
-                    }
-                ?>
                 <table>
                     <tr>
                         <td>
-                            <label for='url'>URL:</label>
+                            <label for='imageName'>Bilddatei:</label>
                         </td>
                         <td>
-                            <input type='text' name='url' id='url' placeholder="http://www.web.ch/image.png"/>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <label for='imageName'>Bild-Name:</label>
-                        </td>
-                        <td>
-                            <input type='text' name='imageName' id='imageName' maxlength="45" placeholder="image.png"/>
+                            <input type="file" name="fileToUpload" id="fileToUpload">
                         </td>
                     </tr>
                     <tr>

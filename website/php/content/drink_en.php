@@ -1,13 +1,14 @@
 <?php
-    $id = htmlspecialchars($_GET["id"]);
-    if (! isset($id)) {
+
+    if (! isset($_GET["id"])) {
         header("location: ".$_SESSION["baseURL"]."Drinklist");
     }
-   $detail_drink = $this->model->getDrinkById($id);
-   if (!isset($detail_drink)) {
+    $id = htmlspecialchars($_GET["id"]);
+    $detail_drink = $this->model->getDrinkById($id);
+    if (!isset($detail_drink)) {
         header("location: ".$_SESSION["baseURL"]."Drinklist");
-   }
-   $imagePath = $this->model->getImagePath($detail_drink->getId());
+    }
+    $imagePath = $this->model->getImagePath($detail_drink->getId());
    
 
     $translate = array();

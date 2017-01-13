@@ -11,27 +11,52 @@ class AdminModel {
         if (isset($postinfo)) {
             $escape = htmlspecialchars($postinfo["submittedAddimage"]);
             if (isset($escape) && $escape != "") {
-                $url = htmlspecialchars($postinfo["url"]);
-                $imageName = htmlspecialchars($postinfo["imageName"]);
                 $drink = htmlspecialchars($postinfo["drink"]);
-                $img = "./pic/drinks/$imageName";
-                $fileContent = file_get_contents($url);
-                if ($fileContent === FALSE) {
-                    header("Location: ".$_SESSION["baseURL"]."Admin?failed");
-                } else {$saveResult = file_put_contents($img, $fileContent);
-                    if ($saveResult === FALSE) {
-                        header("Location: ".$_SESSION["baseURL"]."Admin?failed");
+                $imageId = $this->getMaxImageId() + 1;
+                $imageName = $imageId . "_" . $this->db->escape_string($_FILES["fileToUpload"]["name"]);
+                $drink = $this->db->escape_string($postinfo["drink"]);
+
+                $target_dir = getcwd().DIRECTORY_SEPARATOR."pic/Drinks/";
+                $target_file = $target_dir . $imageId . "_" . basename($_FILES["fileToUpload"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                // Check if image file is a actual image or fake image
+                if(isset($_POST["submit"])) {
+                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                    if($check !== false) {
+                        $uploadOk = 1;
                     } else {
-                        $imageName = $this->db->escape_string($postinfo["imageName"]);
-                        $drink = $this->db->escape_string($postinfo["drink"]);
-                        $imageId = $this->getMaxImageId() + 1;
-                        echo "INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');";
-                        $res = DbHelper::doQuery("INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');");
-                        echo "INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageName);";
-                        $res = DbHelper::doQuery("INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageId);");
-                        header("Location: ".$_SESSION["baseURL"]."Admin");
+                        header("Location: ".$_SESSION["baseURL"]."Admin?failed&1");
                     }
                 }
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    header("Location: ".$_SESSION["baseURL"]."Admin?failed&2");
+                }
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                    header("Location: ".$_SESSION["baseURL"]."Admin?failed&3");
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    header("Location: ".$_SESSION["baseURL"]."Admin?failed&4");
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    header("Location: ".$_SESSION["baseURL"]."Admin?failed&5");
+                // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    } else {
+                        header("Location: ".$_SESSION["baseURL"]."Admin?failed&6");
+                    }
+                }
+                echo "INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');";
+                $res = DbHelper::doQuery("INSERT INTO Image (id, `path`) VALUES ($imageId, '$imageName');");
+                echo "INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageId);";
+                $res = DbHelper::doQuery("INSERT INTO Images_for_Drink (drink_id, image_id) VALUES ($drink, $imageId);");
+                header("Location: ".$_SESSION["baseURL"]."Drink?id=".$drink);
                 
             } else {
                 $name = htmlspecialchars($_POST["name"]);

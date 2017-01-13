@@ -6,12 +6,18 @@
 
 </div>
 <div id="wrapper" class="content">
+    <?php
+        if (isset($_GET["failed"])) {
+            echo '<span id="downloadError" class="error">Error, Sorry broa!</span>';
+        }
+    ?>
+
     <h1>Admin</h1>
-    <p>Administrate Everything!</p>
+    <p>Administrate everything</p>
 
     <form id='addIngredient' action='' method='post' accept-charset='UTF-8'>
         <fieldset>
-            <legend>Add ingredient</legend>
+            <legend>Add Ingredient</legend>
             <input type='hidden' name='submitted' id='submitted' value='1'/>
 
                 <table>
@@ -26,7 +32,7 @@
                     
                     <tr>
                         <td>
-                            <label for='imagepath'>Picture-Name:</label>
+                            <label for='imagepath'>Image-Name:</label>
                         </td>
                         <td>
                             <input type='text' name='imagepath' id='imagepath' maxlength="45"/>
@@ -76,32 +82,17 @@
         </tbody>
     </table>
 <br/><br/><br/><br/>
-    <form id='addImage' action='' method='post' accept-charset='UTF-8'>
+    <form id='addImage' action='' method='post' accept-charset='UTF-8' enctype="multipart/form-data">
         <fieldset>
-            <legend>Bild einem Drink zuordnen</legend>
+            <legend>Add Image to drink</legend>
             <input type='hidden' name='submittedAddimage' id='submittedAddimage' value='1'/>
-                <?php
-                    $getParam = isset($_GET["failed"]) ? htmlspecialchars($_GET["failed"]) : "";
-                    if (isset($getParam) && $getParam != "") {
-                        echo '<span id="downloadError" class="error">Error while downloading image from url</span>';
-                    }
-                ?>
                 <table>
                     <tr>
                         <td>
-                            <label for='url'>URL:</label>
+                            <label for='imageName'>Bilddatei:</label>
                         </td>
                         <td>
-                            <input type='text' name='url' id='url' placeholder="http://www.web.ch/image.png"/>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <label for='imageName'>Picture-Name:</label>
-                        </td>
-                        <td>
-                            <input type='text' name='imageName' id='imageName' maxlength="45" placeholder="image.png"/>
+                            <input type="file" name="fileToUpload" id="fileToUpload">
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +108,7 @@
                                         return strcmp(strtolower($a->getName()), strtolower($b->getName()));
                                     });
                                     foreach ($allDrinks as $drink) {
-                                        echo "<option value='".$drink->getId()."'>'".$drink->getName()."' von " . $drink->getCreator() . "</option>";
+                                        echo "<option value='".$drink->getId()."'>'".$drink->getName()."' of " . $drink->getCreator() . "</option>";
                                     }
                                 ?>
                             </select>
